@@ -7,8 +7,8 @@ class Shared::LayoutHead < BaseComponent
       title @page_title
 
       tailwind_css
-      alpine_js
       htmx_js
+      alpine_js
 
       app_css
       app_js
@@ -29,15 +29,15 @@ class Shared::LayoutHead < BaseComponent
   # TODO: vendor for production
   private def alpine_js
     tag "script",
-      src: "https://unpkg.com/alpinejs@3.11.1/dist/cdn.min.js",
+      src: "https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js",
       defer: "true"
   end
 
   # TODO: vendor for production
   private def htmx_js
     tag "script",
-      src: "https://unpkg.com/htmx.org@1.8.5",
-      integrity: "sha384-7aHh9lqPYGYZ7sTHvzP1t3BAfLhYSTy9ArHdP3Xsr9/3TlGurYgcPBoFmXX2TX/w",
+      src: "https://unpkg.com/htmx.org@1.9.4",
+      integrity: "sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV",
       crossorigin: "anonymous"
   end
 
