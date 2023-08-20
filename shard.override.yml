@@ -1,0 +1,4 @@
+dependencies:
+  carbon:
+    github: luckyframework/carbon
+    version: ~> 0.3.0
