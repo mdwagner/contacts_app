@@ -9,9 +9,9 @@ targets:
     main: src/contacts_app.cr
 
 crystalline:
-  main: tasks.cr
+  main: src/app.cr
 
-crystal: 1.7.3
+crystal: 1.8.2
 
 dependencies:
   lucky:
@@ -23,8 +23,6 @@ dependencies:
   carbon:
     github: luckyframework/carbon
     version: ~> 0.3.0
-  carbon_send_in_blue_adapter:
-    github: atnos/carbon_send_in_blue_adapter
   lucky_env:
     github: luckyframework/lucky_env
     version: ~> 0.1.4

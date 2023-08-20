@@ -2,5 +2,5 @@
 # other crystal tools will sometimes use this.
 #
 # When this file is compiled/run it will require and run 'start_server',
-# which as its name implies will start the server for you app.
+# which as its name implies will start the server for your app.
 require "./start_server"
