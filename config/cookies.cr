@@ -1,7 +1,7 @@
 require "./server"
 
 Lucky::Session.configure do |settings|
-  settings.key = "_lucky_starter_template_session"
+  settings.key = "_contacts_app_session"
 end
 
 Lucky::CookieJar.configure do |settings|

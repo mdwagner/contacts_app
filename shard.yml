@@ -1,4 +1,4 @@
-name: lucky_starter_template
+name: contacts_app
 version: 0.1.0
 
 authors:
@@ -6,7 +6,7 @@ authors:
 
 targets:
   app:
-    main: src/lucky_starter_template.cr
+    main: src/contacts_app.cr
 
 crystalline:
   main: tasks.cr

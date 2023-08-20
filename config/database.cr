@@ -8,7 +8,7 @@ Avram.configure do |settings|
 end
 
 # Database: Yes
-#database_name = "lucky_starter_template_#{LuckyEnv.environment}"
+#database_name = "contacts_app_#{LuckyEnv.environment}"
 
 #AppDatabase.configure do |settings|
   #if LuckyEnv.production?
