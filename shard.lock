@@ -84,6 +84,14 @@ shards:
     git: https://github.com/luckyframework/lucky_task.git
     version: 0.1.1
 
+  micrate:
+    git: https://github.com/amberframework/micrate.git
+    version: 0.15.0
+
+  mysql:
+    git: https://github.com/crystal-lang/crystal-mysql.git
+    version: 0.14.0
+
   openssl_ext:
     git: https://github.com/spider-gazelle/openssl_ext.git
     version: 2.3.0
@@ -107,6 +115,10 @@ shards:
   splay_tree_map:
     git: https://github.com/wyhaines/splay_tree_map.cr.git
     version: 0.2.2
+
+  sqlite3:
+    git: https://github.com/crystal-lang/crystal-sqlite3.git
+    version: 0.19.0
 
   teeplate:
     git: https://github.com/luckyframework/teeplate.git
