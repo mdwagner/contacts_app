@@ -5,8 +5,16 @@ class Contact
     first: String?,
     last: String?,
     phone: String?,
-    created_at: String?,
-    updated_at: String?
+    created_at: {
+      type: Time,
+      nilable: true,
+      converter: TimeUtcConverter
+    },
+    updated_at: {
+      type: Time,
+      nilable: true,
+      converter: TimeUtcConverter
+    }
   })
 
   # Returns Top 10 Contacts based on search _term_
