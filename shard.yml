@@ -9,7 +9,7 @@ targets:
     main: src/contacts_app.cr
 
 crystalline:
-  main: spec/spec_helper.cr
+  main: src/app.cr
 
 crystal: 1.8.2
 
