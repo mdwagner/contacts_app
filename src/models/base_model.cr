@@ -1,2 +1,2 @@
-abstract class BaseModel
+abstract class BaseModel < Jennifer::Model::Base
 end

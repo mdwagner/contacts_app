@@ -1,4 +1,4 @@
-class Contact < Jennifer::Model::Base
+class Contact < BaseModel
   with_timestamps
 
   mapping(

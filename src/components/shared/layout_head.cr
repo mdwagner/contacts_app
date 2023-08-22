@@ -6,12 +6,10 @@ class Shared::LayoutHead < BaseComponent
       utf8_charset
       title @page_title
 
+      app_css
       tailwind_css
       htmx_js
       alpine_js
-
-      app_css
-      app_js
 
       csrf_meta_tags
       responsive_meta_tag
@@ -50,10 +48,5 @@ class Shared::LayoutHead < BaseComponent
       }
       CSS
     end
-  end
-
-  # TODO: use readfile macro (src/js/app.js) for production
-  private def app_js
-    tag "script", defer: "true"
   end
 end
