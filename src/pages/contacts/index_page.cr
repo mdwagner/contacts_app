@@ -44,29 +44,10 @@ class Contacts::IndexPage < MainLayout
   end
 
   private def contacts_query
-    AppDatabase.open do |db|
-      if q = query
-        q = "%#{q}%"
-        return Contact.from_rs(db.query(<<-SQL, args: [q, q, q, q]))
-        SELECT
-          *
-        FROM
-          contacts
-        WHERE
-          first LIKE ? OR
-          last LIKE ? OR
-          phone LIKE ? OR
-          email LIKE ?
-        LIMIT 10
-        SQL
-      else
-        return Contact.from_rs(db.query(<<-SQL))
-        SELECT
-          *
-        FROM
-          contacts
-        SQL
-      end
+    if q = query
+      Contact.search(q)
+    else
+      Contact.all
     end
   end
 end
