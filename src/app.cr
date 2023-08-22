@@ -1,12 +1,13 @@
 require "./shards"
 require "./patches/no_manifest"
+require "./patches/pg_result_set"
 
 # Load the asset manifest
 # Lucky::AssetHelpers.load_manifest "public/manifest.json"
 Lucky::AssetHelpers.no_manifest
 
 require "../config/server"
-require "./app_database"
+require "../config/avram_database"
 require "../config/**"
 require "./models/base_model"
 require "./models/mixins/**"
@@ -24,5 +25,5 @@ require "./actions/**"
 require "./components/base_component"
 require "./components/**"
 require "./pages/**"
-require "../db/migrations/**"
+require "../db/migrations/*"
 require "./app_server"

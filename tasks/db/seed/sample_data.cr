@@ -8,11 +8,6 @@ class Db::Seed::SampleData < LuckyTask::Task
   summary "Add sample database records helpful for development"
 
   def call
-    # Using an Avram::Factory:
-    #
-    # Use the defaults, but override just the email
-    # UserFactory.create &.email("me@example.com")
-
     # Using a SaveOperation:
     # ```
     # SignUpUser.create!(email: "me@example.com", password: "test123", password_confirmation: "test123")

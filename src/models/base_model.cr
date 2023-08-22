@@ -1,5 +1,2 @@
-abstract class BaseModel < Avram::Model
-  def self.database : Avram::Database.class
-    AppDatabase
-  end
+abstract class BaseModel
 end

@@ -23,7 +23,7 @@ class Shared::LayoutHead < BaseComponent
   # TODO: run tailwindcss cli to generate compile-time classes for production
   private def tailwind_css
     tag "script",
-      src: "https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"
+      src: "https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"
   end
 
   # TODO: vendor for production

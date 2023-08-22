@@ -2,14 +2,6 @@ require "./app"
 
 Habitat.raise_if_missing_settings!
 
-# Database: No
-
-# Database: Yes
-#if LuckyEnv.development?
-  #Avram::Migrator::Runner.new.ensure_migrated!
-  #Avram::SchemaEnforcer.ensure_correct_column_mappings!
-#end
-
 app_server = AppServer.new
 
 Signal::INT.trap do

@@ -10,11 +10,6 @@ class Db::Seed::RequiredData < LuckyTask::Task
   summary "Add database records required for the app to work"
 
   def call
-    # Using a Avram::Factory:
-    #
-    # Use the defaults, but override just the email
-    # UserFactory.create &.email("me@example.com")
-
     # Using a SaveOperation:
     #
     # SaveUser.create!(email: "me@example.com", name: "Jane")
