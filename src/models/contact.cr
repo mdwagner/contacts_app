@@ -7,12 +7,12 @@ class Contact
     phone: String?,
     created_at: {
       type: Time,
-      nilable: true,
+      nilable: false,
       converter: TimeUtcConverter
     },
     updated_at: {
       type: Time,
-      nilable: true,
+      nilable: false,
       converter: TimeUtcConverter
     }
   })
