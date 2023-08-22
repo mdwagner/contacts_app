@@ -35,18 +35,11 @@ dependencies:
   jwt:
     github: crystal-community/jwt
     version: ~> 1.6.0
-  jennifer:
-    github: imdrasil/jennifer.cr
-    version: "~> 0.13.0"
   sqlite3:
     github: crystal-lang/crystal-sqlite3
     version: ~> 0.19.0
-  jennifer_sqlite3_adapter:
-    github: imdrasil/jennifer_sqlite3_adapter
-    version: "~> 0.4.0"
-  sam:
-    github: imdrasil/sam.cr
-    version: 0.5.0
+  mg:
+    github: hkalexling/mg
 development_dependencies:
   lucky_flow:
     github: luckyframework/lucky_flow

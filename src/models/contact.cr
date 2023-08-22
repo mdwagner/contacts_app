@@ -1,13 +1,11 @@
-class Contact < BaseModel
-  with_timestamps
-
-  mapping(
-    id: Primary64,
+class Contact
+  DB.mapping({
+    id: Int64,
     email: String,
     first: String?,
     last: String?,
     phone: String?,
-    created_at: Time?,
-    updated_at: Time?,
-  )
+    created_at: String?,
+    updated_at: String?
+  })
 end

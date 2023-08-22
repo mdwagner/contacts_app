@@ -1,12 +1,10 @@
-require "jennifer"
-require "jennifer_sqlite3_adapter"
-
-Jennifer::Config.configure do |conf|
-  conf.adapter = "sqlite3"
-  conf.host = "./db"
-  conf.db = "contacts.db"
-  #conf.logger = Log.for("db", :none)
-  conf.logger = Log.for("db", :debug)
+class UnusedDatabase < Avram::Database
 end
 
-Log.setup "db", :debug, Log::IOBackend.new(formatter: Jennifer::Adapter::DBFormatter)
+UnusedDatabase.configure do |settings|
+  settings.credentials = Avram::Credentials.void
+end
+
+Avram.configure do |settings|
+  settings.database_to_migrate = UnusedDatabase
+end

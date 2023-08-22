@@ -1,4 +1,0 @@
-#!/bin/bash
-source .env
-export DATABASE_URL="$DATABASE_URL"
-./bin/micrate $@

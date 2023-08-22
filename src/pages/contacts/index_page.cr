@@ -24,7 +24,7 @@ class Contacts::IndexPage < MainLayout
                 end
               end
               tbody class: "divide-y divide-gray-200" do
-                contacts_query.to_a.each do |contact|
+                contacts_query.each do |contact|
                   tr do
                     td contact.first || "NULL", class: "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
                     td contact.last || "NULL", class: "whitespace-nowrap px-3 py-4 text-sm text-gray-500"
@@ -44,15 +44,29 @@ class Contacts::IndexPage < MainLayout
   end
 
   private def contacts_query
-    if q = query
-      q = "%#{q}%"
-      Contact
-        .where do
-          _first.like(q) | _last.like(q) | _phone.like(q) | _email.like(q)
-        end
-        .limit(10)
-    else
-      Contact.all
+    AppDatabase.open do |db|
+      if q = query
+        q = "%#{q}%"
+        return Contact.from_rs(db.query(<<-SQL, args: [q, q, q, q]))
+        SELECT
+          *
+        FROM
+          contacts
+        WHERE
+          first LIKE ? OR
+          last LIKE ? OR
+          phone LIKE ? OR
+          email LIKE ?
+        LIMIT 10
+        SQL
+      else
+        return Contact.from_rs(db.query(<<-SQL))
+        SELECT
+          *
+        FROM
+          contacts
+        SQL
+      end
     end
   end
 end

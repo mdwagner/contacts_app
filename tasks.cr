@@ -12,6 +12,9 @@ ENV["LUCKY_TASK"] = "true"
 require "./src/app"
 require "lucky_task"
 
+# Log migrations
+Log.setup "mg", :debug
+
 # You can add your own tasks here in the ./tasks folder
 require "./tasks/**"
 
