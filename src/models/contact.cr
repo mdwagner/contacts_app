@@ -44,4 +44,15 @@ class Contact
       SQL
     end
   end
+
+  def self.find_by_id!(id) : Contact
+    AppDatabase.open do |db|
+      sql = <<-SQL
+      SELECT * FROM contacts WHERE id = ? LIMIT 1
+      SQL
+      return db.query_one(sql, args: [id]) do |rs|
+        Contact.new(rs)
+      end
+    end
+  end
 end

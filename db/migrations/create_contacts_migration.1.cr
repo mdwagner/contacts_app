@@ -1,4 +1,4 @@
-class CreateContacts < MG::Base
+class CreateContactsMigration < MG::Base
   def up : String
     <<-SQL
     CREATE TABLE contacts (
