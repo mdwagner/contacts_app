@@ -1,6 +1,6 @@
 class Contacts::New < BrowserAction
   get "/contacts/new" do
-    # TODO
-    plain_text "New Contact"
+    create_contact = CreateContact.new
+    html Contacts::NewPage, create_contact: create_contact
   end
 end

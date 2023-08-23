@@ -40,6 +40,7 @@ class Contacts::IndexPage < MainLayout
           end
         end
       end
+      link "Add Contact", to: Contacts::New
     end
   end
 

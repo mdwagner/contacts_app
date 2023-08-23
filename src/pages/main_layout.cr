@@ -25,4 +25,8 @@ abstract class MainLayout
       end
     end
   end
+
+  def error_for(field)
+    mount Shared::FieldErrors, field
+  end
 end

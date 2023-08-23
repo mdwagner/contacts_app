@@ -7,10 +7,29 @@ class CreateContact < Avram::Operation
   before_run do
     validate_required email
     validate_format_of email, with: /[^@]+@[^.]+..+/
+    downcase_email
+    validate_email_unique
   end
 
   def run
     insert_statement
+  rescue e : AppDatabase::SQLite3Exception
+    add_error(:flash_errors, "Failed to create Contact")
+    nil
+  end
+
+  private def downcase_email
+    email.value.try do |value|
+      email.value = value.downcase
+    end
+  end
+
+  private def validate_email_unique
+    email.value.try do |value|
+      if Contact.find_by_email?(value)
+        email.add_error "already exists"
+      end
+    end
   end
 
   private def insert_statement

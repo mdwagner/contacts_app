@@ -9,16 +9,31 @@ class UpdateContact < Avram::Operation
   before_run do
     validate_required email
     validate_format_of email, with: /[^@]+@[^.]+..+/
+    downcase_email
+    validate_email_unique
   end
 
   def run
     update_statement
-  rescue e : SQLite3::Exception
-    if e.code == 19
-      email.add_error "already exists"
-      return nil
+  rescue e : AppDatabase::SQLite3Exception
+    add_error(:flash_errors, "Failed to update Contact")
+    nil
+  end
+
+  private def downcase_email
+    email.value.try do |value|
+      email.value = value.downcase
     end
-    raise e
+  end
+
+  private def validate_email_unique
+    email.value.try do |value|
+      if contact = Contact.find_by_email?(value)
+        unless contact_id == contact.id.to_s
+          email.add_error "already exists"
+        end
+      end
+    end
   end
 
   private def update_statement

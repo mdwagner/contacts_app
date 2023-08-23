@@ -28,6 +28,10 @@ class Errors::Show < Lucky::ErrorAction
     end
   end
 
+  def render(error : AppDatabase::SQLite3Exception)
+    error_html DEFAULT_MESSAGE, status: 500
+  end
+
   # Always keep this below other 'render' methods or it may override your
   # custom 'render' methods.
   def render(error : Lucky::RenderableError)

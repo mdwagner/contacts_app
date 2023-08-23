@@ -1,4 +1,7 @@
 class AppDatabase
+  alias SQLite3Exception = SQLite3::Exception
+  alias SQLite3Code = LibSQLite3::Code
+
   DATABASE_URL = ENV["DATABASE_URL"]? || "sqlite3://db/contacts.db"
 
   def self.open(&)
