@@ -1,20 +1,20 @@
 class Contact
   DB.mapping({
-    id: Int64,
-    email: String,
-    first: String?,
-    last: String?,
-    phone: String?,
+    id:         Int64,
+    email:      String,
+    first:      String?,
+    last:       String?,
+    phone:      String?,
     created_at: {
-      type: Time,
-      nilable: false,
-      converter: TimeUtcConverter
+      type:      Time,
+      nilable:   false,
+      converter: TimeUtcConverter,
     },
     updated_at: {
-      type: Time,
-      nilable: false,
-      converter: TimeUtcConverter
-    }
+      type:      Time,
+      nilable:   false,
+      converter: TimeUtcConverter,
+    },
   })
 
   # Returns Top 10 Contacts based on search _term_

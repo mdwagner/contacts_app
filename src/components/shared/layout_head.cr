@@ -14,7 +14,21 @@ class Shared::LayoutHead < BaseComponent
       csrf_meta_tags
       responsive_meta_tag
 
-      live_reload_connect_tag
+      # TODO: add back live_reload_connect_tag after merged into Lucky core
+      # live_reload_connect_tag
+
+      tag "script" do
+        raw <<-JS
+        (function() {
+          var ws = new WebSocket("ws://#{Lucky::ServerSettings.host}:#{Lucky::ServerSettings.reload_port}");
+          ws.onmessage = function() {
+            setTimeout(function() {
+              location.reload();
+            }, 1000);
+          };
+        })();
+        JS
+      end
     end
   end
 
