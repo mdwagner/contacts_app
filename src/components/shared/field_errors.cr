@@ -4,7 +4,7 @@ class Shared::FieldErrors(T) < BaseComponent
   # Customize the markup and styles to match your application
   def render
     unless attribute.valid?
-      div class: "error" do
+      div class: "mt-2 text-sm text-red-600" do
         text "#{label_text} #{attribute.errors.first}"
       end
     end

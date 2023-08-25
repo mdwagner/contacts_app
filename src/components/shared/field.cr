@@ -36,15 +36,12 @@ class Shared::Field(T) < BaseComponent
   needs label_text : String?
 
   def render(&)
-    label_for attribute, label_text
+    label_for(attribute, label_text, class: "block text-sm font-medium leading-6 text-gray-900")
 
-    # You can add more default options here. For example:
-    #
-    #    tag_defaults field: attribute, class: "input"
-    #
-    # Will add the class "input" to the generated HTML.
-    tag_defaults field: attribute do |tag_builder|
-      yield tag_builder
+    div class: "relative mt-1 rounded-md shadow-sm" do
+      tag_defaults field: attribute, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6" do |tag_builder|
+        yield tag_builder
+      end
     end
 
     mount Shared::FieldErrors, attribute
