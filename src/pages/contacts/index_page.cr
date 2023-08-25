@@ -4,7 +4,7 @@ class Contacts::IndexPage < MainLayout
   @contacts : Array(Contact)?
 
   def content
-    div class: "max-w-4xl shadow-xl rounded-lg px-6 py-4 bg-white w-[768px]" do
+    mount RoundedContainer do
       div class: "flex justify-between" do
         form_for(Contacts::Index) do
           div class: "flex items-center space-x-4" do

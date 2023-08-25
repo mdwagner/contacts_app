@@ -2,6 +2,7 @@ class Contacts::Update < BrowserAction
   put "/contacts/:contact_id" do
     UpdateContact.run(params, contact_id: contact_id) do |op, _|
       if op.valid?
+        flash.keep
         flash.success = "Successfully updated Contact"
         redirect Contacts::Index
       else

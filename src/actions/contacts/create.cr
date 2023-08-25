@@ -2,6 +2,7 @@ class Contacts::Create < BrowserAction
   post "/contacts" do
     CreateContact.run(params) do |op, _|
       if op.valid?
+        flash.keep
         flash.success = "Successfully created Contact"
         redirect Contacts::Index
       else
