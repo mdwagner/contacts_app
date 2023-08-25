@@ -6,14 +6,14 @@ class Contacts::IndexPage < MainLayout
   def content
     div class: "max-w-4xl shadow-xl rounded-lg px-6 py-4 bg-white w-[768px]" do
       div class: "flex justify-between" do
-        form_for(Index) do
-          div class: "flex items-center space-x-4 align-middle" do
-            label "Search Term", class: "text-sm font-medium leading-6 text-gray-900", for: "search"
-            input class: "rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6 min-w-[14rem]", id: "search", name: "q", type: "search", value: query || ""
-            button "Search", class: "rounded-md bg-slate-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600", type: "submit"
+        form_for(Contacts::Index) do
+          div class: "flex items-center space-x-4" do
+            label "Search Term", for: "search", class: "text-sm font-medium leading-6 text-gray-900"
+            input id: "search", name: "q", type: "search", value: query || "", class: "rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6 min-w-[14rem]"
+            input value: "Search", type: "submit", class: "rounded-md bg-slate-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 hover:cursor-pointer"
           end
         end
-        link "Add Contact", class: "bg-slate-600 rounded-md px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600", to: Contacts::New
+        link "Add Contact", to: Contacts::New, class: "bg-slate-600 rounded-md px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
       end
       div class: "mt-4 flow-root" do
         if contacts_query.size > 0
@@ -31,11 +31,11 @@ class Contacts::IndexPage < MainLayout
     table class: "w-full divide-y divide-gray-300" do
       thead do
         tr do
-          th "First Name", class: "py-3.5 text-left text-sm font-semibold text-gray-900 w-[15%]", scope: "col"
-          th "Last Name", class: "px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[15%]", scope: "col"
-          th "Email", class: "px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[40%]", scope: "col"
-          th "Phone", class: "px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[20%]", scope: "col"
-          th class: "relative py-3.5 pl-3 pr-4 sm:pr-0 w-[10%]", scope: "col" do
+          th "First Name", class: "whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900 w-[15%]", scope: "col"
+          th "Last Name", class: "whitespace-nowrap px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[15%]", scope: "col"
+          th "Email", class: "whitespace-nowrap px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[40%]", scope: "col"
+          th "Phone", class: "whitespace-nowrap px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[20%]", scope: "col"
+          th class: "whitespace-nowrap relative py-3.5 pl-3 pr-4 sm:pr-0 w-[10%]", scope: "col" do
             span "Edit", class: "sr-only"
           end
         end
