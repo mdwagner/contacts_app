@@ -9,6 +9,7 @@ class Shared::LayoutHead < BaseComponent
       app_css
       tailwind_css
       htmx_js
+      font_awesome
       alpine_js
 
       csrf_meta_tags
@@ -50,6 +51,12 @@ class Shared::LayoutHead < BaseComponent
     tag "script",
       src: "https://unpkg.com/htmx.org@1.9.4",
       integrity: "sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV",
+      crossorigin: "anonymous"
+  end
+
+  private def font_awesome
+    tag "script",
+      src: "https://kit.fontawesome.com/717a8b0c15.js",
       crossorigin: "anonymous"
   end
 

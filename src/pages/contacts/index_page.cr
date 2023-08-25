@@ -35,8 +35,9 @@ class Contacts::IndexPage < MainLayout
           th "Last Name", class: "whitespace-nowrap px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[15%]", scope: "col"
           th "Email", class: "whitespace-nowrap px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[40%]", scope: "col"
           th "Phone", class: "whitespace-nowrap px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[20%]", scope: "col"
-          th class: "whitespace-nowrap relative py-3.5 pl-3 pr-4 sm:pr-0 w-[10%]", scope: "col" do
-            span "Edit", class: "sr-only"
+          th class: "w-[10%]", scope: "col" do
+            span "Edit", class: "sr-only", aria_hidden: "true"
+            span "Delete", class: "sr-only", aria_hidden: "true"
           end
         end
       end
@@ -47,8 +48,15 @@ class Contacts::IndexPage < MainLayout
             td contact.last || "", class: "whitespace-nowrap px-3 py-4 text-sm text-gray-500"
             td contact.email, class: "whitespace-nowrap px-3 py-4 text-sm text-gray-500"
             td contact.phone || "", class: "whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-            td class: "relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 space-x-2" do
-              link "Edit", to: Contacts::Edit.with(contact_id: contact.id), class: "text-slate-500 hover:text-slate-900"
+            td class: "whitespace-nowrap py-4 flex justify-end space-x-3 text-gray-900" do
+              link to: Contacts::Edit.with(contact_id: contact.id), aria_label: "Edit" do
+                i class: "fa-regular fa-pen-to-square"
+              end
+              form_for(Contacts::Delete.with(contact_id: contact.id)) do
+                button type: "submit", aria_label: "Delete" do
+                  i class: "fa-solid fa-xmark"
+                end
+              end
             end
           end
         end
