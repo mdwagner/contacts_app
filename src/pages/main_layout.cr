@@ -14,7 +14,7 @@ abstract class MainLayout
     html lang: "en" do
       mount Shared::LayoutHead, page_title: page_title
 
-      body class: "x-cloak bg-slate-200 w-auto flex flex-col justify-center space-y-4" do
+      body hx_boost: "true", class: "x-cloak bg-slate-200 w-auto flex flex-col justify-center space-y-4" do
         header class: "mx-auto" do
           link page_title, class: "h-full flex p-4 text-gray-500 text-2xl font-sans font-medium leading-normal", to: Home::Index
         end
