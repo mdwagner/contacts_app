@@ -4,12 +4,13 @@ class Contacts::Update < BrowserAction
       if op.valid?
         flash.keep
         flash.success = "Successfully updated Contact"
-        redirect Contacts::Index
+        redirect to: Contacts::Index, status: 303
       else
         if errors = op.errors[:flash_errors]?
           flash.failure = errors.first
         end
         contact = Contact.find_by_id!(contact_id)
+        response.headers["HX-Push-Url"] = Contacts::Edit.with(contact_id: contact_id).path
         html Contacts::EditPage,
           contact: contact,
           update_contact: op

@@ -6,8 +6,6 @@ class Contacts::Delete < BrowserAction
         flash.success = "Successfully deleted Contact"
       elsif errors = op.errors[:flash_errors]?
         flash.failure = errors.first
-      else
-        flash.failure = "Unable to delete Contact"
       end
       redirect to: Contacts::Index, status: 303
     end
