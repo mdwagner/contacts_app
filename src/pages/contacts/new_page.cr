@@ -4,7 +4,7 @@ class Contacts::NewPage < MainLayout
   def content
     mount RoundedContainer do
       h2 "Create new Contact", class: "text-xl font-sans font-medium mb-4 flex justify-center text-gray-700"
-      form_for(Contacts::Create) do
+      form_for(Contacts::Create, hx_boost: "true") do
         div class: "flex flex-col items-center space-y-2" do
           div class: "w-full max-w-xs" do
             mount Shared::Field, create_contact.first do |input_tag|

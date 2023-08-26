@@ -9,7 +9,7 @@ class Contacts::Delete < BrowserAction
       else
         flash.failure = "Unable to delete Contact"
       end
-      redirect Contacts::Index
+      redirect to: Contacts::Index, status: 303
     end
   end
 end

@@ -5,7 +5,7 @@ class Contacts::EditPage < MainLayout
   def content
     mount RoundedContainer do
       h2 "Update Contact", class: "text-xl font-sans font-medium mb-4 flex justify-center text-gray-700"
-      form_for(Contacts::Update.with(contact_id: contact.id)) do
+      form_for(Contacts::Update.with(contact_id: contact.id), hx_boost: "true") do
         div class: "flex flex-col items-center space-y-2" do
           div class: "w-full max-w-xs" do
             mount Shared::Field, update_contact.first do |input_tag|
