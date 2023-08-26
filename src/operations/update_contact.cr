@@ -47,7 +47,8 @@ class UpdateContact < Avram::Operation
           email = ?,
           first = ?,
           last = ?,
-          phone = ?
+          phone = ?,
+          updated_at = ?
         WHERE id = ?
         SQL
       end
@@ -60,7 +61,12 @@ class UpdateContact < Avram::Operation
       first.value,
       last.value,
       phone.value,
+      datetime_now,
       contact_id,
     ]
+  end
+
+  private def datetime_now
+    Time::Format::ISO_8601_DATE_TIME.format(Time.utc)
   end
 end
