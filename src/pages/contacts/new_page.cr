@@ -19,7 +19,8 @@ class Contacts::NewPage < MainLayout
           mount Shared::Field, create_contact.email do |input_tag|
             input_tag.email_input(
               placeholder: "you@example.com",
-              value: create_contact.email.original_value || ""
+              value: create_contact.email.original_value || "",
+              attrs: [:required]
             )
           end
         end

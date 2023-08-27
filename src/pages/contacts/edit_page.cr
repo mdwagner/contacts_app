@@ -20,7 +20,8 @@ class Contacts::EditPage < MainLayout
           mount Shared::Field, update_contact.email do |input_tag|
             input_tag.email_input(
               placeholder: "you@example.com",
-              value: attr_value(update_contact.email, contact.email)
+              value: attr_value(update_contact.email, contact.email),
+              attrs: [:required]
             )
           end
         end
