@@ -6,12 +6,12 @@ class Contacts::IndexPage < MainLayout
   def content
     mount RoundedContainer do
       div class: "flex justify-between" do
-        div class: "flex items-center space-x-4" do
-          label "Search Term", for: "search", class: "text-sm font-medium leading-6 text-gray-900"
-          input id: "search", name: "q", type: "search", value: query || "",
-            hx_get: Contacts::Index.path, hx_push_url: "true", hx_trigger: "keyup changed delay:700ms, input delay:500ms", hx_target: "body", hx_indicator: "#indicator",
-            class: "rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6 min-w-[14rem]"
-          spinner
+        form method: form_method(Contacts::Index.route), action: Contacts::Index.path, hx_boost: "true", hx_trigger: "keyup changed delay:700ms from:#search, input delay:500ms from:#search", hx_indicator: "#indicator" do
+          div class: "flex items-center space-x-4" do
+            label "Search Term", for: "search", class: "text-sm font-medium leading-6 text-gray-900"
+            input id: "search", name: "q", type: "search", value: query || "", class: "rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6 min-w-[14rem]"
+            spinner
+          end
         end
         link "Add Contact", to: Contacts::New, hx_boost: "true", class: "bg-slate-600 rounded-md px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
       end
