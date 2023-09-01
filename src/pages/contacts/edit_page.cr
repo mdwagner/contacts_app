@@ -26,7 +26,7 @@ class Contacts::EditPage < MainLayout
                 value: attr_value(update_contact.email, contact.email),
                 hx_get: Contacts::Email.with(contact_id: contact.id).path,
                 hx_target: %([data-field-id="#{update_contact.email.name}"]),
-                hx_trigger: "input delay:500ms",
+                hx_trigger: "input delay:200ms changed",
                 attrs: [:required]
               )
             end
