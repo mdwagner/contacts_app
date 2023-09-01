@@ -18,10 +18,10 @@ class Contact
   })
 
   # Returns Top 10 Contacts based on search _term_
-  def self.search(term : String) : Array(Contact)
+  def self.search(term : String, offset : Int32 = 0, limit : Int32 = 10) : Array(Contact)
     q = "%#{term}%"
     AppDatabase.open do |db|
-      return Contact.from_rs(db.query(<<-SQL, args: [q, q, q, q]))
+      return Contact.from_rs(db.query(<<-SQL, args: [q, q, q, q, limit, offset]))
       SELECT * FROM contacts
       WHERE
         first LIKE ?
@@ -31,16 +31,16 @@ class Contact
         phone LIKE ?
         OR
         email LIKE ?
-      LIMIT 10
+      LIMIT ? OFFSET ?
       SQL
     end
   end
 
   # Returns all Contacts
-  def self.all : Array(Contact)
+  def self.all(offset : Int32 = 0, limit : Int32 = 10) : Array(Contact)
     AppDatabase.open do |db|
-      return Contact.from_rs(db.query(<<-SQL))
-      SELECT * FROM contacts
+      return Contact.from_rs(db.query(<<-SQL, args: [limit, offset]))
+      SELECT * FROM contacts LIMIT ? OFFSET ?
       SQL
     end
   end

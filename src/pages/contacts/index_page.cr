@@ -1,5 +1,6 @@
 class Contacts::IndexPage < MainLayout
   needs query : String?
+  needs page : Int32
 
   @contacts : Array(Contact)?
 
@@ -18,6 +19,15 @@ class Contacts::IndexPage < MainLayout
       div class: "mt-4 flow-root" do
         if contacts_query.size > 0
           render_table
+
+          div class: "flex justify-center items-center mt-2 space-x-4", hx_boost: "true" do
+            if page > 1
+              link "Previous", to: Contacts::Index.with(page: page - 1, q: query), class: "underline"
+            end
+            if contacts_query.size == 10
+              link "Next", to: Contacts::Index.with(page: page + 1, q: query), class: "underline"
+            end
+          end
         else
           div class: "flex justify-center text-gray-600 text-3xl my-12" do
             text "No results found"
@@ -66,9 +76,9 @@ class Contacts::IndexPage < MainLayout
   private def contacts_query
     @contacts ||= (
       if q = query
-        Contact.search(q)
+        Contact.search(q, offset: (page - 1) * 10, limit: 10)
       else
-        Contact.all
+        Contact.all(offset: (page - 1) * 10, limit: 10)
       end
     )
   end
