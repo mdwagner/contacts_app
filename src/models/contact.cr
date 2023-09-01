@@ -75,4 +75,12 @@ class Contact
       end
     end
   end
+
+  def self.count : Int64
+    AppDatabase.open do |db|
+      return db.scalar(<<-SQL).as(Int64)
+      SELECT COUNT(*) FROM contacts
+      SQL
+    end
+  end
 end

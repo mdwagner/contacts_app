@@ -16,18 +16,14 @@ class Contacts::IndexPage < MainLayout
         end
         link "Add Contact", to: Contacts::New, hx_boost: "true", class: "bg-slate-600 rounded-md px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
       end
+      div class: "flex justify-end" do
+        span hx_get: Contacts::Count.path, hx_trigger: "revealed", class: "mt-4" do
+          spinner("count-indiciator")
+        end
+      end
       div class: "mt-4 flow-root" do
         if contacts_query.size > 0
           render_table
-
-          #div class: "flex justify-center items-center mt-2 space-x-4", hx_boost: "true" do
-            #if page > 1
-              #link "Previous", to: Contacts::Index.with(page: page - 1, q: query), class: "underline"
-            #end
-            #if contacts_query.size == 10
-              #link "Next", to: Contacts::Index.with(page: page + 1, q: query), class: "underline"
-            #end
-          #end
         else
           div class: "flex justify-center text-gray-600 text-3xl my-12" do
             text "No results found"
@@ -73,7 +69,9 @@ class Contacts::IndexPage < MainLayout
         if contacts_query.size == 10
           tr do
             td colspan: "5", class: "text-center pt-4" do
-              button "Load More", type: "button", hx_target: "closest tr", hx_swap: "outerHTML", hx_select: "tbody > tr", hx_get: Contacts::Index.with(page: page + 1, q: query).path
+              span "Loading More...",
+                hx_target: "closest tr", hx_swap: "outerHTML", hx_select: "tbody > tr",
+                hx_get: Contacts::Index.with(page: page + 1, q: query).path, hx_trigger: "revealed"
             end
           end
         end
