@@ -57,6 +57,13 @@ class Contact
     end
   end
 
+  # Returns a Contact by ID or nil
+  def self.find_by_id?(id) : Contact?
+    find_by_id!(id)
+  rescue DB::NoResultsError
+    nil
+  end
+
   # Returns a Contact by email
   def self.find_by_email?(email : String) : Contact?
     AppDatabase.open do |db|

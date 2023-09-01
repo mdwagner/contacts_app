@@ -24,6 +24,9 @@ class Contacts::EditPage < MainLayout
               t.email_input(
                 placeholder: "you@example.com",
                 value: attr_value(update_contact.email, contact.email),
+                hx_get: Contacts::Email.with(contact_id: contact.id).path,
+                hx_target: %([data-field-id="#{update_contact.email.name}"]),
+                hx_trigger: "input delay:500ms",
                 attrs: [:required]
               )
             end
@@ -55,9 +58,11 @@ class Contacts::EditPage < MainLayout
         yield tag_builder
       end
     end
-    unless attr.valid?
-      div class: "mt-2 text-sm text-red-600" do
-        text "#{label} #{attr.errors.first}"
+    div data_field_id: attr.name.to_s do
+      unless attr.valid?
+        div class: "mt-2 text-sm text-red-600" do
+          text "#{label} #{attr.errors.first}"
+        end
       end
     end
   end
