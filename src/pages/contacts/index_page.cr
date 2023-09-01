@@ -20,14 +20,14 @@ class Contacts::IndexPage < MainLayout
         if contacts_query.size > 0
           render_table
 
-          div class: "flex justify-center items-center mt-2 space-x-4", hx_boost: "true" do
-            if page > 1
-              link "Previous", to: Contacts::Index.with(page: page - 1, q: query), class: "underline"
-            end
-            if contacts_query.size == 10
-              link "Next", to: Contacts::Index.with(page: page + 1, q: query), class: "underline"
-            end
-          end
+          #div class: "flex justify-center items-center mt-2 space-x-4", hx_boost: "true" do
+            #if page > 1
+              #link "Previous", to: Contacts::Index.with(page: page - 1, q: query), class: "underline"
+            #end
+            #if contacts_query.size == 10
+              #link "Next", to: Contacts::Index.with(page: page + 1, q: query), class: "underline"
+            #end
+          #end
         else
           div class: "flex justify-center text-gray-600 text-3xl my-12" do
             text "No results found"
@@ -66,6 +66,14 @@ class Contacts::IndexPage < MainLayout
                 hx_target: "closest tr", hx_swap: "delete", hx_confirm: "Are you sure?" do
                 i class: "fa-solid fa-xmark"
               end
+            end
+          end
+        end
+
+        if contacts_query.size == 10
+          tr do
+            td colspan: "5", class: "text-center pt-4" do
+              button "Load More", type: "button", hx_target: "closest tr", hx_swap: "outerHTML", hx_select: "tbody > tr", hx_get: Contacts::Index.with(page: page + 1, q: query).path
             end
           end
         end
