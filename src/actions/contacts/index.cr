@@ -3,6 +3,10 @@ class Contacts::Index < BrowserAction
   param page : Int32? = 1
 
   get "/contacts" do
-    html Contacts::IndexPage, query: q, page: page
+    if xml?
+      xml Contacts::IndexScreen.new.to_s
+    else
+      html Contacts::IndexPage, query: q, page: page
+    end
   end
 end

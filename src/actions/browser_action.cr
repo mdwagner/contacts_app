@@ -14,7 +14,7 @@ abstract class BrowserAction < Lucky::Action
   # Remove this include if you want to use the FLoC tracking.
   include Lucky::SecureHeaders::DisableFLoC
 
-  accepted_formats [:html, :json], default: :html
+  accepted_formats [:html, :json, :xml], default: :html
 
   # This module provides current_user, sign_in, and sign_out methods
   # include Authentic::ActionHelpers(User)
