@@ -4,7 +4,7 @@ class Contacts::Index < BrowserAction
 
   get "/contacts" do
     if xml?
-      xml Contacts::IndexScreen.new.to_s
+      hxml Contacts::IndexScreen
     else
       html Contacts::IndexPage, query: q, page: page
     end

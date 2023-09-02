@@ -41,4 +41,15 @@ abstract class BrowserAction < Lucky::Action
   # private def find_current_user(id) : User?
   # UserQuery.new.id(id).first?
   # end
+
+  def hxml(screen_class : MainScreen.class, status : Int32? = nil, **named_args)
+    xml(
+      body: screen_class.new(**named_args).tap { |x| x.context = context }.perform_render,
+      status: status
+    )
+  end
+
+  def hxml(screen_class : MainScreen.class, status : HTTP::Status, **named_args)
+    hxml(screen_class, status.value, **named_args)
+  end
 end
