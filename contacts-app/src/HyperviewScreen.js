@@ -7,10 +7,25 @@
  */
 
 import React, { PureComponent } from 'react';
+import { DevSettings } from 'react-native';
 import HandleBack from './HandleBack';
 import Hyperview from 'hyperview';
 import moment from 'moment';
 import { MAIN_STACK_NAME, MODAL_STACK_NAME } from './constants';
+
+const liveReloadBehavior = {
+  action: 'live-reload',
+  callback: (element) => {
+    const NAMESPACE_URI = 'http://dev.localhost/dev-livereload';
+    const uri = element.getAttributeNS(NAMESPACE_URI, 'uri');
+    if (uri) {
+      const ws = new WebSocket(uri);
+      ws.onmessage = () => {
+        setTimeout(() => DevSettings.reload(), 1000);
+      };
+    }
+  },
+};
 
 export default class HyperviewScreen extends PureComponent {
   goBack = () => {
@@ -79,6 +94,7 @@ export default class HyperviewScreen extends PureComponent {
           openModal={this.openModal}
           push={this.push}
           route={this.props.route}
+          behaviors={[liveReloadBehavior]}
         />
       </HandleBack>
     );
