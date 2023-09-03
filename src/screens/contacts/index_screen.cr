@@ -1,7 +1,33 @@
 class Contacts::IndexScreen < MainScreen
-  getter(contacts) { Contact.all }
+  property query : String?
+  property rows_only : Bool
+
+  getter(contacts) do
+    if (q = query) && !q.empty?
+      Contact.search(q)
+    else
+      Contact.all
+    end
+  end
+
+  def initialize(@rows_only, @query = nil)
+  end
 
   def render
+    if rows_only
+      items "xmlns": "https://hyperview.org/hyperview" do
+        contacts.each do |contact|
+          item key: contact.id, style: "contact-item" do
+            text contact_text(contact), style: "contact-item-label"
+          end
+        end
+      end
+    else
+      render_screen
+    end
+  end
+
+  def render_screen
     doc "xmlns:lr": "http://dev.localhost/livereload" do
       screen do
         styles do
@@ -27,6 +53,7 @@ class Contacts::IndexScreen < MainScreen
             fontSize: "24",
             fontWeight: "600"
           )
+          style id: "header-add", padding: "8", fontSize: "16"
           style(
             id: "search-field",
             height: "48",
@@ -57,7 +84,7 @@ class Contacts::IndexScreen < MainScreen
         end
         body style: "body", "safe-area": "true", trigger: "load", action: "live-reload" do
           header style: "header" do
-            text "Contacts", style: "header-title"
+            text "Contacts", style: "header-title", trigger: "longPress", action: "reload"
             text "Add",
               style: "header-add",
               "xmlns:alert": "https://hyperview.org/hyperview-alert",
@@ -68,7 +95,9 @@ class Contacts::IndexScreen < MainScreen
           end
           view style: "main" do
             form do
-              text_field name: "q", value: "", placeholder: "Search...", style: "search-field"
+              text_field name: "q", value: "", placeholder: "Search...", style: "search-field" do
+                behavior trigger: "change", action: "replace-inner", target: "contacts-list", href: Contacts::Index.with(rows_only: true).path, verb: "get", delay: "700"
+              end
               list id: "contacts-list" do
                 items do
                   contacts.each do |contact|

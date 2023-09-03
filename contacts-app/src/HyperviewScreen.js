@@ -7,7 +7,7 @@
  */
 
 import React, { PureComponent } from 'react';
-import { DevSettings } from 'react-native';
+import { DevSettings, Platform } from 'react-native';
 import HandleBack from './HandleBack';
 import Hyperview from 'hyperview';
 import moment from 'moment';
@@ -71,6 +71,8 @@ export default class HyperviewScreen extends PureComponent {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         Expires: 0,
         Pragma: 'no-cache',
+        'x-hyperview-platform': Platform.OS,
+        'x-hyperview-platform-version': Platform.Version,
         ...init.headers,
       }
     });

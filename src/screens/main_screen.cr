@@ -66,8 +66,8 @@ abstract class MainScreen
     end
   end
 
-  def items(&) : Nil
-    element "items" do
+  def items(**opts, &) : Nil
+    element "items", **opts do
       yield
     end
   end
@@ -124,8 +124,14 @@ abstract class MainScreen
     end
   end
 
+  def text_field(**opts, &) : Nil
+    element "text-field", **opts do
+      yield
+    end
+  end
+
   def text_field(**opts) : Nil
-    element "text-field", **opts
+    text_field(**opts) { }
   end
 
   def select_single(**opts, &) : Nil
