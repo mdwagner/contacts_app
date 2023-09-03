@@ -11,19 +11,17 @@ import { DevSettings } from 'react-native';
 import HandleBack from './HandleBack';
 import Hyperview from 'hyperview';
 import moment from 'moment';
-import { MAIN_STACK_NAME, MODAL_STACK_NAME } from './constants';
+import { MAIN_STACK_NAME, MODAL_STACK_NAME, IP_ADDRESS } from './constants';
 
 const liveReloadBehavior = {
   action: 'live-reload',
   callback: (element) => {
-    const NAMESPACE_URI = 'http://dev.localhost/dev-livereload';
-    const uri = element.getAttributeNS(NAMESPACE_URI, 'uri');
-    if (uri) {
-      const ws = new WebSocket(uri);
-      ws.onmessage = () => {
-        setTimeout(() => DevSettings.reload(), 1000);
-      };
-    }
+    const NAMESPACE_URI = 'http://dev.localhost/livereload';
+    const port = element.getAttributeNS(NAMESPACE_URI, 'port') || '3001';
+    const uri = `ws://${IP_ADDRESS}:${port}`;
+    new WebSocket(uri).onmessage = () => {
+      setTimeout(() => DevSettings.reload(), 1000);
+    };
   },
 };
 

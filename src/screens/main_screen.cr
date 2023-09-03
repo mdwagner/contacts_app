@@ -13,8 +13,9 @@ abstract class MainScreen
 
   delegate element, attribute, to: xml
 
-  def doc(xmlns : String = "https://hyperview.org/hyperview", &) : Nil
-    element "doc", "xmlns": xmlns do
+  def doc(**opts, &) : Nil
+    element "doc", **opts do
+      attribute "xmlns", "https://hyperview.org/hyperview"
       yield
     end
   end
@@ -37,8 +38,14 @@ abstract class MainScreen
     end
   end
 
+  def style(**opts, &) : Nil
+    element "style", **opts do
+      yield
+    end
+  end
+
   def style(**opts) : Nil
-    element "style", **opts
+    style(**opts) { }
   end
 
   def body(**opts, &) : Nil
