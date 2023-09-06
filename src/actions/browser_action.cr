@@ -16,6 +16,8 @@ abstract class BrowserAction < Lucky::Action
 
   accepted_formats [:html, :json, :xml], default: :html
 
+  include Lucky::HXMLRenderable
+
   # This module provides current_user, sign_in, and sign_out methods
   # include Authentic::ActionHelpers(User)
 
@@ -41,22 +43,4 @@ abstract class BrowserAction < Lucky::Action
   # private def find_current_user(id) : User?
   # UserQuery.new.id(id).first?
   # end
-
-  macro hxml(screen_class = nil, _with_status_code = 200, **assigns)
-    {% screen_class = screen_class || "#{@type.name}Screen".id %}
-    {% if !screen_class.resolve.ancestors.includes?(Lucky::HXMLScreen) %}
-      {% screen_class.raise "Couldn't render #{screen_class} in #{@type.name} because it is not an HXMLScreen" %}
-    {% end %}
-
-    instance = {{ screen_class }}.new(
-      context: context,
-      {% for key, value in assigns %}
-        {{ key }}: {{ value }},
-      {% end %}
-      {% for key in EXPOSURES %}
-        {{ key }}: {{ key }},
-      {% end %}
-    )
-    xml(body: instance.perform_render, status: {{ _with_status_code }})
-  end
 end

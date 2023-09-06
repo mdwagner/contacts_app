@@ -1,6 +1,8 @@
 require "./shards"
 require "./patches/no_manifest"
 require "./patches/hxml_screen"
+require "./patches/hxml_component"
+require "./patches/hxml_renderable"
 
 # Load the asset manifest
 # Lucky::AssetHelpers.load_manifest "public/manifest.json"
@@ -24,6 +26,7 @@ require "./emails/**"
 require "./actions/mixins/**"
 require "./actions/**"
 require "./components/base_component"
+require "./components/base_hxml_component"
 require "./components/ui/**"
 require "./components/**"
 require "./pages/**"
