@@ -5,7 +5,7 @@ class Contacts::Index < BrowserAction
 
   get "/contacts" do
     if xml?
-      hxml Contacts::IndexScreen, query: q, rows_only: rows_only
+      hxml Contacts::IndexScreen, query: q, page: page, rows_only: rows_only
     else
       html Contacts::IndexPage, query: q, page: page
     end

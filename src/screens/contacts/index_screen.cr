@@ -1,34 +1,38 @@
 class Contacts::IndexScreen < MainScreen
-  property query : String?
-  property rows_only : Bool
+  needs query : String?
+  needs page : Int32
+  needs rows_only : Bool
 
   getter(contacts) do
-    if (q = query) && !q.empty?
-      Contact.search(q)
+    if q = query
+      Contact.search(q, offset: (page - 1) * 10, limit: 10)
     else
-      Contact.all
+      Contact.all(offset: (page - 1) * 10, limit: 10)
     end
   end
 
-  def initialize(@rows_only, @query = nil)
-  end
-
   def render
-    if rows_only
-      items "xmlns": "https://hyperview.org/hyperview" do
-        contacts.each do |contact|
-          item key: contact.id, style: "contact-item" do
-            text contact_text(contact), style: "contact-item-label"
-          end
-        end
-      end
+    if rows_only?
+      render_rows
     else
       render_screen
     end
   end
 
+  def render_rows
+    items do
+      hv_ns_attr
+      contacts.each do |contact|
+        item key: contact.id, style: "contact-item" do
+          text contact_text(contact), style: "contact-item-label"
+        end
+      end
+    end
+  end
+
   def render_screen
-    doc "xmlns:lr": "http://dev.localhost/livereload" do
+    doc do
+      lr_ns_attr
       screen do
         styles do
           style(
@@ -95,17 +99,18 @@ class Contacts::IndexScreen < MainScreen
           end
           view style: "main" do
             form do
-              text_field name: "q", value: "", placeholder: "Search...", style: "search-field" do
-                behavior trigger: "change", action: "replace-inner", target: "contacts-list", href: Contacts::Index.with(rows_only: true).path, verb: "get", delay: "700"
+              text_field name: "q", value: query || "", placeholder: "Search...", style: "search-field" do
+                behavior(
+                  trigger: "change",
+                  action: "replace-inner",
+                  target: "contacts-list",
+                  verb: "get",
+                  href: Contacts::Index.with(q: query, page: page, rows_only: true).path,
+                  delay: "700"
+                )
               end
               list id: "contacts-list" do
-                items do
-                  contacts.each do |contact|
-                    item key: contact.id, style: "contact-item" do
-                      text contact_text(contact), style: "contact-item-label"
-                    end
-                  end
-                end
+                render_rows
               end
             end
           end

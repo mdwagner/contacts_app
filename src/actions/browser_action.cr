@@ -42,14 +42,21 @@ abstract class BrowserAction < Lucky::Action
   # UserQuery.new.id(id).first?
   # end
 
-  def hxml(screen_class : MainScreen.class, status : Int32? = nil, **named_args)
-    xml(
-      body: screen_class.new(**named_args).tap { |x| x.context = context }.perform_render,
-      status: status
-    )
-  end
+  macro hxml(screen_class = nil, _with_status_code = 200, **assigns)
+    {% screen_class = screen_class || "#{@type.name}Screen".id %}
+    {% if !screen_class.resolve.ancestors.includes?(Lucky::HXMLScreen) %}
+      {% screen_class.raise "Couldn't render #{screen_class} in #{@type.name} because it is not an HXMLScreen" %}
+    {% end %}
 
-  def hxml(screen_class : MainScreen.class, status : HTTP::Status, **named_args)
-    hxml(screen_class, status.value, **named_args)
+    instance = {{ screen_class }}.new(
+      context: context,
+      {% for key, value in assigns %}
+        {{ key }}: {{ value }},
+      {% end %}
+      {% for key in EXPOSURES %}
+        {{ key }}: {{ key }},
+      {% end %}
+    )
+    xml(body: instance.perform_render, status: {{ _with_status_code }})
   end
 end
