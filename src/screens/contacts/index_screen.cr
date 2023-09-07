@@ -10,6 +10,34 @@ class Contacts::IndexScreen < MainScreen
     end
   end
 
+  def append_styles
+    style(
+      id: "search-field",
+      height: "48",
+      paddingLeft: "24",
+      paddingRight: "24",
+      backgroundColor: "#EEEEEE",
+      borderBottomWidth: "1",
+      borderBottomColor: "#D6D6D6"
+    ) do
+      modifier focused: "true" do
+        style borderBottomColor: "#777777"
+      end
+    end
+    style(
+      id: "contact-item",
+      flex: "1",
+      flexDirection: "row",
+      height: "48",
+      paddingLeft: "24",
+      paddingRight: "24",
+      alignItems: "center",
+      backgroundColor: "#FFFFFF",
+      borderBottomWidth: "1",
+      borderBottomColor: "#EEE"
+    )
+  end
+
   def render_content
     form do
       text_field(

@@ -1,6 +1,20 @@
 class Contacts::ShowScreen < MainScreen
   needs contact : Contact
 
+  def append_styles
+    style(
+      id: "header-button",
+      color: "blue",
+      fontSize: "16",
+      padding: "8"
+    )
+    style(id: "details")
+    style(id: "contact-name")
+    style(id: "contact-section")
+    style(id: "contact-section-label")
+    style(id: "contact-section-info")
+  end
+
   def render_header
     text "Back", style: "header-button" do
       behavior trigger: "press", action: "back"

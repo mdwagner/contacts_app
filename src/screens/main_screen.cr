@@ -28,7 +28,9 @@ abstract class MainScreen < Lucky::HXMLScreen
       paddingRight: "24",
       paddingTop: "12",
       paddingBottom: "12",
-      backgroundColor: "white"
+      backgroundColor: "white",
+      borderBottomWidth: "1",
+      borderBottomColor: "#D6D6D6",
     )
     style(
       id: "header-title",
@@ -36,33 +38,18 @@ abstract class MainScreen < Lucky::HXMLScreen
       fontSize: "24",
       fontWeight: "600"
     )
-    style id: "header-add", padding: "8", fontSize: "16"
     style(
-      id: "search-field",
-      height: "48",
-      paddingLeft: "24",
-      paddingRight: "24",
-      backgroundColor: "#EEEEEE",
-      borderTopWidth: "1",
-      borderTopColor: "#D6D6D6",
-      borderBottomWidth: "1",
-      borderBottomColor: "#D6D6D6"
-    ) do
-      modifier focused: "true" do
-        style borderBottomColor: "#777777"
-      end
-    end
+      id: "header-add",
+      padding: "8",
+      fontSize: "16"
+    )
     style(
-      id: "contact-item",
-      flex: "1",
-      flexDirection: "row",
-      height: "48",
-      paddingLeft: "24",
-      paddingRight: "24",
-      alignItems: "center",
-      backgroundColor: "#FFFFFF",
-      borderBottomWidth: "1",
-      borderBottomColor: "#EEE"
+      id: "main",
+      flex: "1"
+    )
+    style(
+      id: "footer",
+      paddingBottom: "28"
     )
     append_styles
   end
@@ -95,6 +82,7 @@ abstract class MainScreen < Lucky::HXMLScreen
           view style: "main" do
             render_content
           end
+          view style: "footer" { }
         end
       end
     end
