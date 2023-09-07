@@ -71,10 +71,15 @@ module Lucky::HXMLTags
     end
   end
 
-  def text(content = "", **opts) : Nil
+  def text(content = "", **opts, &) : Nil
     element "text", **opts do
+      yield
       xml.text content
     end
+  end
+
+  def text(content = "", **opts) : Nil
+    text(content, **opts) { }
   end
 
   def image(**opts) : Nil

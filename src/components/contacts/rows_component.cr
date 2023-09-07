@@ -15,7 +15,24 @@ class Contacts::RowsComponent < BaseHXMLComponent
       hv_ns_attr
       contacts.each do |contact|
         item key: contact.id, style: "contact-item" do
+          behavior(
+            trigger: "press",
+            action: "push",
+            href: Contacts::Show.with(contact_id: contact.id).path
+          )
           text contact_text(contact), style: "contact-item-label"
+        end
+      end
+      if contacts.size == 10
+        item key: "load-more", id: "load-more", style: "load-more-item" do
+          behavior(
+            trigger: "visible",
+            action: "replace",
+            target: "load-more",
+            verb: "get",
+            href: Contacts::Index.with(page: page + 1, rows_only: true).path
+          )
+          spinner
         end
       end
     end
