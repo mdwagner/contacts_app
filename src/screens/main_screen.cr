@@ -66,7 +66,7 @@ abstract class MainScreen < Lucky::HXMLScreen
 
   def render
     doc do
-      attribute "xmlns:lr", "http://dev.localhost/livereload"
+      attribute "xmlns:live-reload", "http://dev.localhost/live-reload"
       screen do
         styles do
           render_styles

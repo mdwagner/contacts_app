@@ -1,4 +1,7 @@
 require "./hxml_tags"
+require "./hxml_form_helpers"
+require "./hxml_request_helpers"
+require "./hxml_mount_component"
 
 module Lucky::HXMLBuilder
   include Lucky::Assignable
@@ -28,21 +31,5 @@ module Lucky::HXMLBuilder
 
   def to_s(io)
     perform_render(io)
-  end
-
-  def mount(component : Lucky::HXMLComponent.class, *args, **named_args, &) : Nil
-    component.new(*args, **named_args).tap do |instance|
-      instance.xml = self.xml
-      instance.render do |*yield_args|
-        yield *yield_args
-      end
-    end
-  end
-
-  def mount(component : Lucky::HXMLComponent.class, *args, **named_args) : Nil
-    component.new(*args, **named_args).tap do |instance|
-      instance.xml = self.xml
-      instance.render
-    end
   end
 end

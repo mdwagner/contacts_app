@@ -2,13 +2,13 @@ module Lucky::HXMLTags
   # Defines Hyperview XML Namespace attribute
   #
   # Only needed on root elements.
-  def hv_ns_attr : Nil
+  def hyperview_namespace : Nil
     attribute "xmlns", "https://hyperview.org/hyperview"
   end
 
   def doc(**opts, &) : Nil
     element "doc", **opts do
-      hv_ns_attr
+      hyperview_namespace
       yield
     end
   end

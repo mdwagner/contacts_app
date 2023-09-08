@@ -12,7 +12,7 @@ class Contacts::RowsComponent < BaseHXMLComponent
 
   def render
     items do
-      hv_ns_attr
+      hyperview_namespace
       contacts.each do |contact|
         item key: contact.id, style: "contact-item" do
           behavior(

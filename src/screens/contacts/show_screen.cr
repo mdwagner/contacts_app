@@ -54,6 +54,14 @@ class Contacts::ShowScreen < MainScreen
     text "Back", style: "header-button" do
       behavior trigger: "press", action: "back"
     end
+
+    text "Edit", style: "header-button" do
+      behavior(
+        trigger: "press",
+        action: "reload",
+        href: Contacts::Edit.with(contact_id: contact.id).path
+      )
+    end
   end
 
   def render_content

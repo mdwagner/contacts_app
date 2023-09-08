@@ -16,7 +16,7 @@ import { MAIN_STACK_NAME, MODAL_STACK_NAME, IP_ADDRESS } from './constants';
 const liveReloadBehavior = {
   action: 'live-reload',
   callback: (element) => {
-    const NAMESPACE_URI = 'http://dev.localhost/livereload';
+    const NAMESPACE_URI = 'http://dev.localhost/live-reload';
     const port = element.getAttributeNS(NAMESPACE_URI, 'port') || '3001';
     const uri = `ws://${IP_ADDRESS}:${port}`;
     new WebSocket(uri).onmessage = () => {
