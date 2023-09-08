@@ -13,12 +13,12 @@ class Contacts::IndexScreen < MainScreen
   def append_styles
     style(
       id: "search-field",
-      height: "48",
-      paddingLeft: "24",
-      paddingRight: "24",
-      backgroundColor: "#EEEEEE",
+      height: Theme.spacing(12),
+      paddingLeft: Theme.spacing(6),
+      paddingRight: Theme.spacing(6),
+      backgroundColor: Theme.colors("gray", 100),
       borderBottomWidth: "1",
-      borderBottomColor: "#D6D6D6"
+      borderBottomColor: Theme.colors("gray", 300)
     ) do
       modifier focused: "true" do
         style borderBottomColor: "#777777"
@@ -28,14 +28,25 @@ class Contacts::IndexScreen < MainScreen
       id: "contact-item",
       flex: "1",
       flexDirection: "row",
-      height: "48",
-      paddingLeft: "24",
-      paddingRight: "24",
+      height: Theme.spacing(12),
+      paddingLeft: Theme.spacing(6),
+      paddingRight: Theme.spacing(6),
       alignItems: "center",
-      backgroundColor: "#FFFFFF",
+      backgroundColor: "white",
       borderBottomWidth: "1",
-      borderBottomColor: "#EEE"
+      borderBottomColor: Theme.colors("gray", 100)
     )
+    if android?
+      style(
+        id: "contacts-list-style",
+        marginBottom: Theme.spacing(7)
+      )
+    else
+      style(
+        id: "contacts-list-style",
+        marginBottom: Theme.spacing(12)
+      )
+    end
   end
 
   def render_content
@@ -57,6 +68,7 @@ class Contacts::IndexScreen < MainScreen
       end
       list(
         id: "contacts-list",
+        style: "contacts-list-style",
         trigger: "refresh",
         action: "replace-inner",
         target: "contacts-list",

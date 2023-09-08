@@ -24,32 +24,28 @@ abstract class MainScreen < Lucky::HXMLScreen
       alignItems: "center",
       flexDirection: "row",
       justifyContent: "space-between",
-      paddingLeft: "24",
-      paddingRight: "24",
-      paddingTop: "12",
-      paddingBottom: "12",
+      paddingLeft: Theme.spacing(6),
+      paddingRight: Theme.spacing(6),
+      paddingTop: Theme.spacing(3),
+      paddingBottom: Theme.spacing(3),
       backgroundColor: "white",
       borderBottomWidth: "1",
-      borderBottomColor: "#D6D6D6",
+      borderBottomColor: Theme.colors("gray", 300),
     )
     style(
       id: "header-title",
       color: "black",
-      fontSize: "24",
-      fontWeight: "600"
+      fontSize: Theme.font_size("2xl"),
+      fontWeight: Theme.font_weight("semibold")
     )
     style(
       id: "header-add",
-      padding: "8",
-      fontSize: "16"
+      padding: Theme.spacing(2),
+      fontSize: Theme.font_size("base")
     )
     style(
       id: "main",
       flex: "1"
-    )
-    style(
-      id: "footer",
-      paddingBottom: "28"
     )
     append_styles
   end
@@ -70,7 +66,7 @@ abstract class MainScreen < Lucky::HXMLScreen
 
   def render
     doc do
-      lr_ns_attr
+      attribute "xmlns:lr", "http://dev.localhost/livereload"
       screen do
         styles do
           render_styles
@@ -82,13 +78,8 @@ abstract class MainScreen < Lucky::HXMLScreen
           view style: "main" do
             render_content
           end
-          view style: "footer" { }
         end
       end
     end
-  end
-
-  private def lr_ns_attr : Nil
-    attribute "xmlns:lr", "http://dev.localhost/livereload"
   end
 end

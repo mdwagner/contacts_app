@@ -53,6 +53,10 @@ module Lucky::HXMLTags
     end
   end
 
+  def view(**opts) : Nil
+    view(**opts) { }
+  end
+
   def list(**opts, &) : Nil
     element "list", **opts do
       yield
