@@ -3,6 +3,7 @@ class AppServer < Lucky::BaseAppServer
   # https://luckyframework.org/guides/http-and-routing/http-handlers
   def middleware : Array(HTTP::Handler)
     [
+      #HXMLLogHandler.new, # NOTE: for logging out hxml response to log file
       Lucky::RequestIdHandler.new,
       Lucky::ForceSSLHandler.new,
       Lucky::HttpMethodOverrideHandler.new,
