@@ -22,23 +22,23 @@ class Contacts::FormFieldsComponent < BaseHXMLComponent
 
       render_form_field(update_contact.first, contact.first)
       render_form_field(update_contact.last, contact.last)
-      render_form_field(update_contact.email, contact.email)
+      render_form_field(update_contact.email, contact.email, "keyboard-type": "email-address")
       render_form_field(update_contact.phone, contact.phone)
 
       view id: "form-flash", style: "form-flash-container"
     end
   end
 
-  def render_form_field(attr, value)
+  def render_form_field(attr, value, **field_opts)
     label = Wordsmith::Inflector.humanize(attr.name.to_s)
 
     view style: "edit-field-container" do
-      text_field(
+      text_field(**field_opts.merge(
         name: "#{attr.param_key}:#{attr.name}",
         placeholder: label,
         value: value || "",
         style: "edit-field"
-      )
+      ))
       unless attr.valid?
         text "#{label} #{attr.errors.first}", style: "edit-field-error"
       end
