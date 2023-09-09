@@ -5,7 +5,7 @@ class Contacts::Update < BrowserAction
     UpdateContact.run(params, contact_id: contact_id) do |op, _|
       if op.valid?
         if xml?
-          hxml_component Contacts::FormFieldsComponent,
+          hxml_component Contacts::EditFormFieldsComponent,
             contact: contact,
             update_contact: op,
             saved: true
@@ -21,7 +21,7 @@ class Contacts::Update < BrowserAction
         end
 
         if xml?
-          hxml_component Contacts::FormFieldsComponent,
+          hxml_component Contacts::EditFormFieldsComponent,
             contact: contact,
             update_contact: op
         else

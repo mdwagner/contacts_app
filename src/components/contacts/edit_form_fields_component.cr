@@ -1,4 +1,4 @@
-class Contacts::FormFieldsComponent < BaseHXMLComponent
+class Contacts::EditFormFieldsComponent < BaseHXMLComponent
   needs contact : Contact
   needs update_contact : UpdateContact
   needs saved : Bool = false

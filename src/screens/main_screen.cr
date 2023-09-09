@@ -39,12 +39,11 @@ abstract class MainScreen < Lucky::HXMLScreen
       fontWeight: Theme.font_weight("semibold")
     )
     style(
-      id: "header-add",
-      padding: Theme.spacing(2),
-      fontSize: Theme.font_size("base")
+      id: "main",
+      flex: "1"
     )
     style(
-      id: "main",
+      id: "flex-1",
       flex: "1"
     )
     append_styles
@@ -55,13 +54,6 @@ abstract class MainScreen < Lucky::HXMLScreen
       style: "header-title",
       trigger: "longPress",
       action: "reload"
-    text "Add",
-      style: "header-add",
-      "xmlns:alert": "https://hyperview.org/hyperview-alert",
-      trigger: "press",
-      action: "alert",
-      "alert:title": "Create a new Contact",
-      "alert:message": "Coming Soon!"
   end
 
   def render

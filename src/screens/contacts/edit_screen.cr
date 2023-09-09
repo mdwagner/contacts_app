@@ -90,7 +90,7 @@ class Contacts::EditScreen < MainScreen
   def render_content
     form_for(Contacts::Update.with(contact_id: contact.id), style: "form-container") do |href, verb|
       view id: "form-fields" do
-        mount Contacts::FormFieldsComponent,
+        mount Contacts::EditFormFieldsComponent,
           contact: contact,
           update_contact: update_contact
       end

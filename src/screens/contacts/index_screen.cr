@@ -12,6 +12,12 @@ class Contacts::IndexScreen < MainScreen
 
   def append_styles
     style(
+      id: "header-button",
+      color: Theme.colors("blue", 600),
+      fontSize: Theme.font_size("lg"),
+      fontWeight: Theme.font_weight("medium")
+    )
+    style(
       id: "search-field",
       height: Theme.spacing(12),
       paddingLeft: Theme.spacing(6),
@@ -36,21 +42,21 @@ class Contacts::IndexScreen < MainScreen
       borderBottomWidth: "1",
       borderBottomColor: Theme.colors("gray", 100)
     )
-    if android?
-      style(
-        id: "contacts-list-style",
-        marginBottom: Theme.spacing(7)
-      )
-    else
-      style(
-        id: "contacts-list-style",
-        marginBottom: Theme.spacing(12)
-      )
+  end
+
+  def render_header
+    text "Contacts",
+      style: "header-title",
+      trigger: "longPress",
+      action: "reload"
+
+    text "Add", style: "header-button" do
+      behavior trigger: "press", action: "new", href: Contacts::New.path
     end
   end
 
   def render_content
-    form do
+    form style: "flex-1" do
       behavior(
         trigger: "on-event",
         "event-name": "contact-updated",
@@ -78,7 +84,6 @@ class Contacts::IndexScreen < MainScreen
 
       list(
         id: "contacts-list",
-        style: "contacts-list-style",
         trigger: "refresh",
         action: "replace-inner",
         target: "contacts-list",
