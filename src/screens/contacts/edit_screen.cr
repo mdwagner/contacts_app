@@ -10,6 +10,56 @@ class Contacts::EditScreen < MainScreen
       fontWeight: Theme.font_weight("medium"),
       padding: Theme.spacing(2)
     )
+    style(
+      id: "form-container",
+      flex: "1",
+      flexDirection: "column",
+      justifyContent: "space-between"
+    )
+    style(
+      id: "edit-field-container",
+      width: "100%",
+      height: Theme.spacing(14),
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "flex-start",
+      backgroundColor: "white",
+      borderBottomWidth: "1",
+      borderBottomColor: Theme.colors("gray", 300),
+      paddingHorizontal: Theme.spacing(6)
+    )
+    style(
+      id: "edit-field",
+      fontSize: Theme.font_size("base")
+    )
+    style(
+      id: "edit-field-error",
+      color: Theme.colors("red", 600),
+      fontSize: Theme.font_size("sm"),
+      paddingTop: Theme.spacing(0.5)
+    )
+    style(
+      id: "action-group",
+      borderTopWidth: "1",
+      borderTopColor: Theme.colors("gray", 300)
+    )
+    style(
+      id: "button",
+      width: "100%",
+      height: Theme.spacing(14),
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: "white",
+      borderBottomWidth: "1",
+      borderBottomColor: Theme.colors("gray", 300),
+      paddingHorizontal: Theme.spacing(6)
+    )
+    style(
+      id: "button-label",
+      color: Theme.colors("blue", 600),
+      fontSize: Theme.font_size("base"),
+      fontWeight: Theme.font_weight("medium")
+    )
   end
 
   def render_header
@@ -19,25 +69,24 @@ class Contacts::EditScreen < MainScreen
   end
 
   def render_content
-    form do
-      form_method_override(Contacts::Update.route(contact_id: contact.id))
-      csrf_tag
-
+    form_for(Contacts::Update.with(contact_id: contact.id), style: "form-container") do |href, verb|
       view id: "form-fields" do
         mount Contacts::FormFieldsComponent,
           contact: contact,
           update_contact: update_contact
       end
 
-      view style: "button" do
-        behavior(
-          trigger: "press",
-          action: "replace-inner",
-          target: "form-fields",
-          verb: form_verb(Contacts::Update.route(contact_id: contact.id)),
-          href: Contacts::Update.with(contact_id: contact.id).path
-        )
-        text "Save", style: "button-label"
+      view style: "action-group" do
+        view style: "button" do
+          behavior(
+            trigger: "press",
+            action: "replace-inner",
+            target: "form-fields",
+            verb: verb,
+            href: href
+          )
+          text "Save", style: "button-label"
+        end
       end
     end
   end

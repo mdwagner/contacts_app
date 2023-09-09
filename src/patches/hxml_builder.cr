@@ -2,6 +2,7 @@ require "./hxml_tags"
 require "./hxml_form_helpers"
 require "./hxml_request_helpers"
 require "./hxml_mount_component"
+require "./hxml_forgery_protection_helpers"
 
 module Lucky::HXMLBuilder
   include Lucky::Assignable

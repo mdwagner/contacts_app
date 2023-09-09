@@ -3,7 +3,7 @@ class Contacts::FormFieldsComponent < BaseHXMLComponent
   needs update_contact : UpdateContact
 
   def render
-    view style: "edit-group" do
+    view do
       render_form_field(update_contact.first, contact.first)
       render_form_field(update_contact.last, contact.last)
       render_form_field(update_contact.email, contact.email)
@@ -14,11 +14,12 @@ class Contacts::FormFieldsComponent < BaseHXMLComponent
   def render_form_field(attr, value)
     label = Wordsmith::Inflector.humanize(attr.name.to_s)
 
-    view style: "edit-field" do
+    view style: "edit-field-container" do
       text_field(
         name: "#{attr.param_key}:#{attr.name}",
         placeholder: label,
-        value: value || ""
+        value: value || "",
+        style: "edit-field"
       )
       unless attr.valid?
         text "#{label} #{attr.errors.first}", style: "edit-field-error"

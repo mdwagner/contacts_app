@@ -5,6 +5,7 @@ abstract class Lucky::HXMLComponent
   include Lucky::HXMLFormHelpers
   include Lucky::HXMLRequestHelpers
   include Lucky::HXMLMountComponent
+  include Lucky::HXMLForgeryProtectionHelpers
 
   needs context : HTTP::Server::Context
 
