@@ -42,6 +42,11 @@ class Contacts::IndexScreen < MainScreen
       borderBottomWidth: "1",
       borderBottomColor: Theme.colors("gray", 100)
     )
+    style(
+      id: "load-more-item",
+      marginTop: Theme.spacing(2),
+      marginBottom: Theme.spacing(5)
+    )
   end
 
   def render_header

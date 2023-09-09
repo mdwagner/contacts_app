@@ -13,6 +13,7 @@ class Contacts::RowsComponent < BaseHXMLComponent
   def render
     items do
       hyperview_namespace
+
       contacts.each do |contact|
         item key: contact.id, style: "contact-item" do
           behavior(
@@ -23,6 +24,7 @@ class Contacts::RowsComponent < BaseHXMLComponent
           text contact_text(contact), style: "contact-item-label"
         end
       end
+
       if contacts.size == 10
         item key: "load-more", id: "load-more", style: "load-more-item" do
           behavior(
