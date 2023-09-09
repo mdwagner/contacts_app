@@ -51,6 +51,15 @@ class Contacts::IndexScreen < MainScreen
 
   def render_content
     form do
+      behavior(
+        trigger: "on-event",
+        "event-name": "contact-updated",
+        action: "replace-inner",
+        target: "contacts-list",
+        verb: "get",
+        href: Contacts::Index.with(rows_only: true).path
+      )
+
       text_field(
         name: "q",
         value: query || "",
@@ -66,6 +75,7 @@ class Contacts::IndexScreen < MainScreen
           delay: "700"
         )
       end
+
       list(
         id: "contacts-list",
         style: "contacts-list-style",

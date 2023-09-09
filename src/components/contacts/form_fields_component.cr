@@ -1,13 +1,31 @@
 class Contacts::FormFieldsComponent < BaseHXMLComponent
   needs contact : Contact
   needs update_contact : UpdateContact
+  needs saved : Bool = false
 
   def render
     view do
+      hyperview_namespace
+
+      if saved?
+        behavior(
+          trigger: "load",
+          action: "dispatch-event",
+          "event-name": "contact-updated"
+        )
+        behavior(
+          trigger: "load",
+          action: "reload",
+          href: Contacts::Show.with(contact_id: contact.id).path
+        )
+      end
+
       render_form_field(update_contact.first, contact.first)
       render_form_field(update_contact.last, contact.last)
       render_form_field(update_contact.email, contact.email)
       render_form_field(update_contact.phone, contact.phone)
+
+      view id: "form-flash", style: "form-flash-container"
     end
   end
 

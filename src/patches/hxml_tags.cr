@@ -110,8 +110,14 @@ module Lucky::HXMLTags
     element "web-view", **opts
   end
 
+  def behavior(**opts, &) : Nil
+    element "behavior", **opts do
+      yield
+    end
+  end
+
   def behavior(**opts) : Nil
-    element "behavior", **opts
+    behavior(**opts) { }
   end
 
   def modifier(**opts, &) : Nil
@@ -173,4 +179,42 @@ module Lucky::HXMLTags
       yield
     end
   end
+
+  # TODO: move to separate module
+  ### Alert Component ### START
+  #
+  def hyperview_alert_namespace : Nil
+    attribute "xmlns:alert", "https://hyperview.org/hyperview-alert"
+  end
+  #
+  def alert_title(title : String) : Nil
+    attribute "alert:title", title
+  end
+  #
+  def alert_message(message : String) : Nil
+    attribute "alert:message", message
+  end
+  #
+  def alert_label(label : String) : Nil
+    attribute "alert:label", label
+  end
+  #
+  def alert_option(**opts, &) : Nil
+    element "alert:option", **opts do
+      yield
+    end
+  end
+  #
+  def alert_option(label : String, **opts, &) : Nil
+    alert_option(**opts) do
+      alert_label label
+      yield
+    end
+  end
+  #
+  def alert_option(label : String, **opts) : Nil
+    alert_option(label, **opts) { }
+  end
+  #
+  ### Alert Component ### END
 end
