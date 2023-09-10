@@ -16,6 +16,7 @@ import LiveReload from './liveReload';
 import OpenPhone from './phone';
 import OpenEmail from './email';
 import ShowMessage from './message';
+import SwipeableRow from './swipeable';
 
 export default class HyperviewScreen extends PureComponent {
   goBack = () => {
@@ -72,6 +73,8 @@ export default class HyperviewScreen extends PureComponent {
 
   behaviors = [LiveReload, OpenPhone, OpenEmail, ShowMessage];
 
+  components = [SwipeableRow];
+
   render() {
     const entrypointUrl = this.props.route.params?.url;
 
@@ -89,6 +92,7 @@ export default class HyperviewScreen extends PureComponent {
           push={this.push}
           route={this.props.route}
           behaviors={this.behaviors}
+          components={this.components}
         />
       </HandleBack>
     );

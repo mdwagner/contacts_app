@@ -15,13 +15,31 @@ class Contacts::RowsComponent < BaseHXMLComponent
       hyperview_namespace
 
       contacts.each do |contact|
-        item key: contact.id, style: "contact-item" do
-          behavior(
-            trigger: "press",
-            action: "push",
-            href: Contacts::Show.with(contact_id: contact.id).path
-          )
-          text contact_text(contact), style: "contact-item-label"
+        item key: contact.id do
+          element "swipe:row", "xmlns:swipe": "https://hypermedia.systems/hyperview/swipeable" do
+            element "swipe:main" do
+              view style: "contact-item", key: contact.id do
+                behavior(
+                  trigger: "press",
+                  action: "push",
+                  href: Contacts::Show.with(contact_id: contact.id).path
+                )
+                text contact_text(contact), style: "contact-item-label"
+              end
+            end
+
+            element "swipe:button" do
+              view style: "swipe-button" do
+                text "Edit", style: "button-label"
+              end
+            end
+
+            element "swipe:button" do
+              view style: "swipe-button" do
+                text "Delete", style: "button-label-delete"
+              end
+            end
+          end
         end
       end
 
