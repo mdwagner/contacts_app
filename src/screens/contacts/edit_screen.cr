@@ -49,11 +49,6 @@ class Contacts::EditScreen < MainScreen
       paddingHorizontal: Theme.spacing(6)
     )
     style(
-      id: "form-flash-error",
-      color: Theme.colors("red", 600),
-      fontSize: Theme.font_size("sm")
-    )
-    style(
       id: "action-group",
       borderTopWidth: "1",
       borderTopColor: Theme.colors("gray", 300)

@@ -8,6 +8,8 @@ class Contacts::EditFormFieldsComponent < BaseHXMLComponent
       hyperview_namespace
 
       if saved?
+        mount Shared::ToastMessagesComponent
+
         behavior(
           trigger: "load",
           action: "dispatch-event",

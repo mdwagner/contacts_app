@@ -5,13 +5,15 @@ class Contacts::Update < BrowserAction
     UpdateContact.run(params, contact_id: contact_id) do |op, _|
       if op.valid?
         if xml?
+          success_flash
+
           hxml_component Contacts::EditFormFieldsComponent,
             contact: contact,
             update_contact: op,
             saved: true
         else
           flash.keep
-          flash.success = "Successfully updated Contact"
+          success_flash
 
           redirect to: Contacts::Index, status: 303
         end
@@ -32,5 +34,9 @@ class Contacts::Update < BrowserAction
         end
       end
     end
+  end
+
+  private def success_flash
+    flash.success = "Successfully updated Contact"
   end
 end

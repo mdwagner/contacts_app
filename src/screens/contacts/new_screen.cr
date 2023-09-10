@@ -69,11 +69,6 @@ class Contacts::NewScreen < MainScreen
       backgroundColor: "white",
       paddingHorizontal: Theme.spacing(6)
     )
-    style(
-      id: "form-flash-error",
-      color: Theme.colors("red", 600),
-      fontSize: Theme.font_size("sm")
-    )
   end
 
   def render_header

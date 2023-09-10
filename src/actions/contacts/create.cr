@@ -3,12 +3,14 @@ class Contacts::Create < BrowserAction
     CreateContact.run(params) do |op, _|
       if op.valid?
         if xml?
+          success_flash
+
           hxml_component Contacts::NewFormFieldsComponent,
             create_contact: op,
             saved: true
         else
           flash.keep
-          flash.success = "Successfully created Contact"
+          success_flash
 
           redirect to: Contacts::Index, status: 303
         end
@@ -26,5 +28,9 @@ class Contacts::Create < BrowserAction
         end
       end
     end
+  end
+
+  private def success_flash
+    flash.success = "Successfully created Contact"
   end
 end

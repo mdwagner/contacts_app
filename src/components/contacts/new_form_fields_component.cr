@@ -7,6 +7,8 @@ class Contacts::NewFormFieldsComponent < BaseHXMLComponent
       hyperview_namespace
 
       if saved? && (saved_contact = saved_contact?)
+        mount Shared::ToastMessagesComponent
+
         behavior(
           trigger: "load",
           action: "dispatch-event",

@@ -15,6 +15,7 @@ import { MAIN_STACK_NAME, MODAL_STACK_NAME } from './constants';
 import LiveReload from './liveReload';
 import OpenPhone from './phone';
 import OpenEmail from './email';
+import ShowMessage from './message';
 
 export default class HyperviewScreen extends PureComponent {
   goBack = () => {
@@ -69,7 +70,7 @@ export default class HyperviewScreen extends PureComponent {
     });
   }
 
-  behaviors = [LiveReload, OpenPhone, OpenEmail];
+  behaviors = [LiveReload, OpenPhone, OpenEmail, ShowMessage];
 
   render() {
     const entrypointUrl = this.props.route.params?.url;

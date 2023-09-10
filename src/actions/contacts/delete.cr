@@ -3,10 +3,12 @@ class Contacts::Delete < BrowserAction
     DeleteContact.run(contact_id: contact_id) do |op, _|
       if op.valid?
         if xml?
+          success_flash
+
           hxml_component Contacts::DeleteComponent
         else
           flash.keep
-          flash.success = "Successfully deleted Contact"
+          success_flash
 
           redirect to: Contacts::Index, status: 303
         end
@@ -14,7 +16,7 @@ class Contacts::Delete < BrowserAction
         if xml?
           set_flash_errors(op)
 
-          hxml_component Contacts::DeleteComponent, flash: context.flash
+          hxml_component Contacts::DeleteComponent
         else
           flash.keep
           set_flash_errors(op)
@@ -29,5 +31,9 @@ class Contacts::Delete < BrowserAction
     if errors = operation.errors[:flash_errors]?
       flash.failure = errors.first
     end
+  end
+
+  private def success_flash
+    flash.success = "Successfully deleted Contact"
   end
 end
