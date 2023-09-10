@@ -29,14 +29,18 @@ class Contacts::RowsComponent < BaseHXMLComponent
             end
 
             element "swipe:button" do
-              view style: "swipe-button" do
+              view style: "swipe-button", key: contact.id do
+                behavior(
+                  trigger: "press",
+                  action: "push",
+                  href: Contacts::Edit.with(contact_id: contact.id).path
+                )
+                behavior(
+                  trigger: "press",
+                  action: "dispatch-event",
+                  "event-name": "swipeable-close"
+                )
                 text "Edit", style: "button-label"
-              end
-            end
-
-            element "swipe:button" do
-              view style: "swipe-button" do
-                text "Delete", style: "button-label-delete"
               end
             end
           end

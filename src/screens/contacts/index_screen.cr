@@ -47,6 +47,20 @@ class Contacts::IndexScreen < MainScreen
       marginTop: Theme.spacing(2),
       marginBottom: Theme.spacing(5)
     )
+    style(
+      id: "swipe-button",
+      flexDirection: "row",
+      height: Theme.spacing(12),
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: Theme.colors("gray", 200),
+      paddingHorizontal: Theme.spacing(4)
+    )
+    style(
+      id: "button-label",
+      color: Theme.colors("blue", 600),
+      fontWeight: Theme.font_weight("medium")
+    )
   end
 
   def render_header
