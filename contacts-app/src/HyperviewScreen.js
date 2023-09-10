@@ -7,23 +7,14 @@
  */
 
 import React, { PureComponent } from 'react';
-import { DevSettings, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import HandleBack from './HandleBack';
 import Hyperview from 'hyperview';
 import moment from 'moment';
-import { MAIN_STACK_NAME, MODAL_STACK_NAME, IP_ADDRESS } from './constants';
-
-const liveReloadBehavior = {
-  action: 'live-reload',
-  callback: (element) => {
-    const NAMESPACE_URI = 'http://dev.localhost/live-reload';
-    const port = element.getAttributeNS(NAMESPACE_URI, 'port') || '3001';
-    const uri = `ws://${IP_ADDRESS}:${port}`;
-    new WebSocket(uri).onmessage = () => {
-      setTimeout(() => DevSettings.reload(), 1000);
-    };
-  },
-};
+import { MAIN_STACK_NAME, MODAL_STACK_NAME } from './constants';
+import LiveReload from './liveReload';
+import OpenPhone from './phone';
+import OpenEmail from './email';
 
 export default class HyperviewScreen extends PureComponent {
   goBack = () => {
@@ -78,6 +69,8 @@ export default class HyperviewScreen extends PureComponent {
     });
   }
 
+  behaviors = [LiveReload, OpenPhone, OpenEmail];
+
   render() {
     const entrypointUrl = this.props.route.params?.url;
 
@@ -94,7 +87,7 @@ export default class HyperviewScreen extends PureComponent {
           openModal={this.openModal}
           push={this.push}
           route={this.props.route}
-          behaviors={[liveReloadBehavior]}
+          behaviors={this.behaviors}
         />
       </HandleBack>
     );

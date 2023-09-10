@@ -68,12 +68,24 @@ class Contacts::ShowScreen < MainScreen
     view style: "details" do
       text "#{contact.first} #{contact.last}", style: "contact-name"
 
-      view style: "contact-section gap-bottom" do
+      view "href-style": "contact-section gap-bottom" do
+        behavior(
+          "xmlns:comms": "https://hypermedia.systems/hyperview/communications",
+          trigger: "press",
+          action: "open-phone",
+          "comms:phone-number": contact.phone || ""
+        )
         text "Phone", style: "contact-section-label"
         text contact.phone || "", style: "contact-section-info"
       end
 
-      view style: "contact-section" do
+      view "href-style": "contact-section" do
+        behavior(
+          "xmlns:comms": "https://hypermedia.systems/hyperview/communications",
+          trigger: "press",
+          action: "open-email",
+          "comms:email-address": contact.email
+        )
         text "Email", style: "contact-section-label"
         text contact.email, style: "contact-section-info"
       end
