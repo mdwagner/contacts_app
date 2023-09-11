@@ -13,11 +13,15 @@ class Contacts::ShowScreen < MainScreen
       id: "details",
       backgroundColor: Theme.colors("gray", 100),
       flex: "1",
-      alignItems: "center"
+      alignItems: "center",
+      rowGap: Theme.spacing(5)
     )
     style(
       id: "contact-name",
-      padding: Theme.spacing(8),
+      height: Theme.spacing(20),
+      paddingHorizontal: Theme.spacing(8),
+      paddingVertical: Theme.spacing(7),
+      justifyContent: "center",
       fontSize: Theme.font_size("2xl"),
       fontWeight: Theme.font_weight("semibold")
     )
@@ -28,6 +32,7 @@ class Contacts::ShowScreen < MainScreen
       borderColor: Theme.colors("gray", 100),
       borderRadius: "10",
       width: "85%",
+      height: Theme.spacing(16),
       paddingTop: Theme.spacing(2),
       paddingBottom: Theme.spacing(3),
       paddingHorizontal: Theme.spacing(3)
@@ -43,10 +48,6 @@ class Contacts::ShowScreen < MainScreen
       color: Theme.colors("blue", 600),
       fontSize: Theme.font_size("base"),
       fontWeight: Theme.font_weight("medium")
-    )
-    style(
-      id: "gap-bottom",
-      marginBottom: Theme.spacing(5)
     )
   end
 
@@ -68,7 +69,7 @@ class Contacts::ShowScreen < MainScreen
     view style: "details" do
       text "#{contact.first} #{contact.last}", style: "contact-name"
 
-      view "href-style": "contact-section gap-bottom" do
+      view "href-style": "contact-section" do
         behavior(
           "xmlns:comms": "https://hypermedia.systems/hyperview/communications",
           trigger: "press",
