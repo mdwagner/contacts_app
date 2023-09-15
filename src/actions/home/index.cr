@@ -1,5 +1,9 @@
 class Home::Index < BrowserAction
   get "/" do
-    redirect Contacts::Index
+    if xml?
+      redirect Mobile::Contacts::Index
+    else
+      redirect Contacts::Index
+    end
   end
 end

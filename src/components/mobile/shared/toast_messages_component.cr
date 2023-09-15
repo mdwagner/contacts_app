@@ -1,4 +1,4 @@
-class Shared::ToastMessagesComponent < BaseHXMLComponent
+class Mobile::Shared::ToastMessagesComponent < BaseHXMLComponent
   def render
     context.flash.each do |_, flash_message|
       behavior(

@@ -1,4 +1,4 @@
-class Contacts::RowsComponent < BaseHXMLComponent
+class Mobile::RowsComponent < BaseHXMLComponent
   needs query : String?
   needs page : Int32
 

@@ -1,16 +1,14 @@
-class Contacts::Delete < BrowserAction
-  delete "/contacts/:contact_id" do
+class Mobile::Contacts::Delete < MobileAction
+  delete "/mobile/contacts/:contact_id" do
     DeleteContact.run(contact_id: contact_id) do |op, _|
       if op.valid?
-        flash.keep
         success_flash
 
-        redirect to: Contacts::Index, status: 303
+        hxml_component DeleteComponent
       else
-        flash.keep
         set_flash_errors(op)
 
-        redirect to: Contacts::Index, status: 303
+        hxml_component DeleteComponent
       end
     end
   end

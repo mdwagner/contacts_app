@@ -1,4 +1,4 @@
-class Contacts::EditScreen < MainScreen
+class Mobile::Contacts::EditScreen < MainScreen
   needs contact : Contact
   needs update_contact : UpdateContact
 
@@ -85,7 +85,7 @@ class Contacts::EditScreen < MainScreen
   def render_content
     form_for(Contacts::Update.with(contact_id: contact.id), style: "form-container") do |href, verb|
       view id: "form-fields" do
-        mount Contacts::EditFormFieldsComponent,
+        mount EditFormFieldsComponent,
           contact: contact,
           update_contact: update_contact
       end

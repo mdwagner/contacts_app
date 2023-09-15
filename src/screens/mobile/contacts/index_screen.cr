@@ -1,4 +1,4 @@
-class Contacts::IndexScreen < MainScreen
+class Mobile::Contacts::IndexScreen < MainScreen
   needs query : String?
   needs page : Int32
 
@@ -109,7 +109,7 @@ class Contacts::IndexScreen < MainScreen
         verb: "get",
         href: Contacts::Index.with(rows_only: true).path
       ) do
-        mount Contacts::RowsComponent, query: query, page: page
+        mount RowsComponent, query: query, page: page
       end
     end
   end

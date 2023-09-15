@@ -1,20 +1,21 @@
-class Contacts::Update < BrowserAction
+class Mobile::Contacts::Update < MobileAction
   getter(contact) { Contact.find_by_id!(contact_id) }
 
-  put "/contacts/:contact_id" do
+  put "/mobile/contacts/:contact_id" do
     UpdateContact.run(params, contact_id: contact_id) do |op, _|
       if op.valid?
-        flash.keep
         success_flash
 
-        redirect to: Contacts::Index, status: 303
+        hxml_component EditFormFieldsComponent,
+          contact: contact,
+          update_contact: op,
+          saved: true
       else
         if errors = op.errors[:flash_errors]?
           flash.failure = errors.first
         end
 
-        response.headers["HX-Push-Url"] = Contacts::Edit.with(contact_id: contact_id).path
-        html Contacts::EditPage,
+        hxml_component EditFormFieldsComponent,
           contact: contact,
           update_contact: op
       end

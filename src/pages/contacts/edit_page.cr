@@ -38,7 +38,7 @@ class Contacts::EditPage < MainLayout
           end
         end
         div class: "flex flex-col items-center mt-6" do
-          mount UI::PrimaryButton do |t|
+          mount PrimaryButton do |t|
             t.submit "Update"
           end
         end

@@ -1,4 +1,4 @@
-class Contacts::ShowScreen < MainScreen
+class Mobile::Contacts::ShowScreen < MainScreen
   needs contact : Contact
 
   def append_styles

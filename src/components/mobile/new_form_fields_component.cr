@@ -1,4 +1,4 @@
-class Contacts::NewFormFieldsComponent < BaseHXMLComponent
+class Mobile::NewFormFieldsComponent < BaseHXMLComponent
   needs create_contact : CreateContact
   needs saved : Bool = false
 

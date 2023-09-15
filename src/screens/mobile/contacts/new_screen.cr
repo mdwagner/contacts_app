@@ -1,4 +1,4 @@
-class Contacts::NewScreen < MainScreen
+class Mobile::Contacts::NewScreen < MainScreen
   needs create_contact : CreateContact
 
   def append_styles
@@ -80,7 +80,7 @@ class Contacts::NewScreen < MainScreen
   def render_content
     form_for(Contacts::Create, style: "form-container") do |href, verb|
       view id: "form-fields" do
-        mount Contacts::NewFormFieldsComponent,
+        mount NewFormFieldsComponent,
           create_contact: create_contact
       end
 

@@ -1,18 +1,19 @@
-class Contacts::Create < BrowserAction
-  post "/contacts" do
+class Mobile::Contacts::Create < MobileAction
+  post "/mobile/contacts" do
     CreateContact.run(params) do |op, _|
       if op.valid?
-        flash.keep
         success_flash
 
-        redirect to: Contacts::Index, status: 303
+        hxml_component NewFormFieldsComponent,
+          create_contact: op,
+          saved: true
       else
         if errors = op.errors[:flash_errors]?
           flash.failure = errors.first
         end
 
-        response.headers["HX-Push-Url"] = Contacts::New.path
-        html Contacts::NewPage, create_contact: op
+        hxml_component NewFormFieldsComponent,
+          create_contact: op
       end
     end
   end

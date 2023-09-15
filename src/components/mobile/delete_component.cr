@@ -1,4 +1,4 @@
-class Contacts::DeleteComponent < BaseHXMLComponent
+class Mobile::DeleteComponent < BaseHXMLComponent
   def render
     view do
       hyperview_namespace
