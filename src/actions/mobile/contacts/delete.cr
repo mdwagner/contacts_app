@@ -1,5 +1,5 @@
 class Mobile::Contacts::Delete < MobileAction
-  delete "/mobile/contacts/:contact_id" do
+  post "/mobile/contacts/:contact_id/delete" do
     DeleteContact.run(contact_id: contact_id) do |op, _|
       if op.valid?
         success_flash

@@ -78,10 +78,9 @@ class Mobile::Contacts::NewScreen < MainScreen
   end
 
   def render_content
-    form_for(Contacts::Create, style: "form-container") do |href, verb|
+    form style: "form-container" do
       view id: "form-fields" do
-        mount NewFormFieldsComponent,
-          create_contact: create_contact
+        mount NewFormFieldsComponent, create_contact: create_contact
       end
 
       view style: "action-group" do
@@ -90,8 +89,8 @@ class Mobile::Contacts::NewScreen < MainScreen
             trigger: "press",
             action: "replace-inner",
             target: "form-fields",
-            verb: verb,
-            href: href
+            verb: "post",
+            href: Contacts::Create.path
           )
           text "Save", style: "button-label"
         end

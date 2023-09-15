@@ -83,7 +83,7 @@ class Mobile::Contacts::EditScreen < MainScreen
   end
 
   def render_content
-    form_for(Contacts::Update.with(contact_id: contact.id), style: "form-container") do |href, verb|
+    form style: "form-container" do
       view id: "form-fields" do
         mount EditFormFieldsComponent,
           contact: contact,
@@ -96,8 +96,8 @@ class Mobile::Contacts::EditScreen < MainScreen
             trigger: "press",
             action: "replace-inner",
             target: "form-fields",
-            verb: verb,
-            href: href
+            verb: "post",
+            href: Contacts::Update.with(contact_id: contact.id).path
           )
           text "Save", style: "button-label"
         end
@@ -111,7 +111,7 @@ class Mobile::Contacts::EditScreen < MainScreen
           text "Cancel", style: "button-label"
         end
 
-        form_for(Contacts::Delete.with(contact_id: contact.id)) do |delete_href, delete_verb|
+        form do
           view style: "button" do
             behavior trigger: "press", action: "alert" do
               hyperview_alert_namespace
@@ -122,8 +122,8 @@ class Mobile::Contacts::EditScreen < MainScreen
                   trigger: "press",
                   action: "replace-inner",
                   target: "form-flash",
-                  href: delete_href,
-                  verb: delete_verb
+                  verb: "post",
+                  href: Contacts::Delete.with(contact_id: contact.id).path
                 )
               end
               alert_option "Cancel"

@@ -1,7 +1,7 @@
 class Mobile::Contacts::Update < MobileAction
   getter(contact) { Contact.find_by_id!(contact_id) }
 
-  put "/mobile/contacts/:contact_id" do
+  post "/mobile/contacts/:contact_id/update" do
     UpdateContact.run(params, contact_id: contact_id) do |op, _|
       if op.valid?
         success_flash
