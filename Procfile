@@ -1,2 +1,2 @@
 web: bin/app
-release: lucky db.migrate
+release: lucky mg.migrate
