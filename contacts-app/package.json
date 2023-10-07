@@ -23,7 +23,7 @@
     "moment": "^2.29.4",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "0.72.4",
+    "react-native": "0.72.5",
     "react-native-communications": "^2.2.1",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-keyboard-aware-scrollview": "2.1.0",
