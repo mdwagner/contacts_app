@@ -1,6 +1,6 @@
 abstract class MobileAction < Lucky::Action
   include Lucky::EnforceUnderscoredRoute
-  include Lucky::HXMLRenderable
+  include LuckyHXML::Renderable
 
   accepted_formats [:xml], default: :xml
 end

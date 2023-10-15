@@ -1,4 +1,4 @@
-Lucky::HXMLBuilder.configure do |settings|
+LuckyHXML::Builder.configure do |settings|
   if LuckyEnv.development?
     settings.indent = 2
   end

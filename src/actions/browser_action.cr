@@ -16,8 +16,6 @@ abstract class BrowserAction < Lucky::Action
 
   accepted_formats [:html, :json, :xml], default: :html
 
-  include Lucky::HXMLRenderable
-
   # This module provides current_user, sign_in, and sign_out methods
   # include Authentic::ActionHelpers(User)
 

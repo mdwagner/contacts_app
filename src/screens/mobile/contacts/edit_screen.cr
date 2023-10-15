@@ -113,10 +113,11 @@ class Mobile::Contacts::EditScreen < MainScreen
 
         form do
           view style: "button" do
-            behavior trigger: "press", action: "alert" do
-              hyperview_alert_namespace
-              alert_title "Confirm delete"
-              alert_message "Are you sure you want to delete #{contact.first}?"
+            alert_behavior(
+              title: "Confirm delete",
+              message: "Are you sure you want to delete #{contact.first}?",
+              trigger: "press"
+            ) do
               alert_option "Confirm" do
                 behavior(
                   trigger: "press",

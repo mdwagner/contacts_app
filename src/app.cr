@@ -1,8 +1,5 @@
 require "./shards"
 require "./patches/no_manifest"
-require "./patches/hxml_screen"
-require "./patches/hxml_component"
-require "./patches/hxml_renderable"
 
 # Load the asset manifest
 # Lucky::AssetHelpers.load_manifest "public/manifest.json"

@@ -1,4 +1,4 @@
-abstract class MainScreen < Lucky::HXMLScreen
+abstract class MainScreen < LuckyHXML::Screen
   # Override to add custom styles to default styles
   abstract def append_styles
 

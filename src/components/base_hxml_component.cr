@@ -1,2 +1,2 @@
-abstract class BaseHXMLComponent < Lucky::HXMLComponent
+abstract class BaseHXMLComponent < LuckyHXML::Component
 end
