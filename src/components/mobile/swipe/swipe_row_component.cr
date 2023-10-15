@@ -1,4 +1,4 @@
-class SwipeRowComponent < BaseHXMLComponent
+class Mobile::SwipeRowComponent < BaseHXMLComponent
   def render(&)
     element "swipe:row" do
       swipe_namespace

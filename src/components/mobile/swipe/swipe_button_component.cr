@@ -1,4 +1,4 @@
-class SwipeButtonComponent < BaseHXMLComponent
+class Mobile::SwipeButtonComponent < BaseHXMLComponent
   def render(&)
     element "swipe:button" do
       yield
