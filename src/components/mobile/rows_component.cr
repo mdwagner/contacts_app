@@ -16,8 +16,8 @@ class Mobile::RowsComponent < BaseHXMLComponent
 
       contacts.each do |contact|
         item key: contact.id do
-          element "swipe:row", "xmlns:swipe": "https://hypermedia.systems/hyperview/swipeable" do
-            element "swipe:main" do
+          mount SwipeRowComponent do
+            mount SwipeMainComponent do
               view style: "contact-item", key: contact.id do
                 behavior(
                   trigger: "press",
@@ -28,7 +28,7 @@ class Mobile::RowsComponent < BaseHXMLComponent
               end
             end
 
-            element "swipe:button" do
+            mount SwipeButtonComponent do
               view style: "swipe-button", key: contact.id do
                 behavior(
                   trigger: "press",

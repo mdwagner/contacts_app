@@ -70,23 +70,15 @@ class Mobile::Contacts::ShowScreen < MainScreen
       text "#{contact.first} #{contact.last}", style: "contact-name"
 
       view "href-style": "contact-section" do
-        behavior(
-          "xmlns:comms": "https://hypermedia.systems/hyperview/communications",
-          trigger: "press",
-          action: "open-phone",
-          "comms:phone-number": contact.phone || ""
-        )
+        mount PhoneBehaviorComponent, phone_number: contact.phone || ""
+
         text "Phone", style: "contact-section-label"
         text contact.phone || "", style: "contact-section-info"
       end
 
       view "href-style": "contact-section" do
-        behavior(
-          "xmlns:comms": "https://hypermedia.systems/hyperview/communications",
-          trigger: "press",
-          action: "open-email",
-          "comms:email-address": contact.email
-        )
+        mount EmailBehaviorComponent, email: contact.email
+
         text "Email", style: "contact-section-label"
         text contact.email, style: "contact-section-info"
       end
